@@ -1,0 +1,3205 @@
+ChangeSet@1.2519, 2006-07-19 15:55:04+02:00, msvensson@neptunus.(none) +2 -0
+  Bug #21135 Crash in test "func_time"
+   - backport patch from 5.0
+   - "table" can be NULL in temporary fields used for type conversion
+
+  sql/field.cc@1.232, 2006-07-19 15:55:03+02:00, msvensson@neptunus.(none) +23 -23
+    table can be NULL in temporary fields used for type conversion.
+    Store value in field as if db_low_byte_first was set.
+
+  sql/field.h@1.132, 2006-07-19 15:55:03+02:00, msvensson@neptunus.(none) +1 -1
+    table can be NULL in temporary fields used for type conversion.
+    Store value in field as if db_low_byte_first was set.
+
+ChangeSet@1.2518, 2006-07-17 20:40:41+02:00, joerg@trift2. +12 -0
+  Changes to make "sql/sql_locale.cc" compile + link on Windows:
+  1) When initializing a boolean variable, do not use string representations '"false"' and '"true"' 
+      but rather the boolean values 'false' and 'true'.
+  2) Add the module to the various Windows description files.
+
+  VC++Files/libmysqld/libmysqld.dsp@1.24, 2006-07-17 20:40:39+02:00, joerg@trift2. +4 -0
+    Add "sql/sql_locale.cpp" with similar settings as the other files.
+
+  VC++Files/libmysqld/libmysqld.vcproj@1.3, 2006-07-17 20:40:39+02:00, joerg@trift2. +36 -0
+    Add "sql/sql_locale.cpp" with similar settings as the other files.
+
+  VC++Files/libmysqld/libmysqld_ia64.dsp@1.3, 2006-07-17 20:40:39+02:00, joerg@trift2. +4 -0
+    Add "sql/sql_locale.cpp" with similar settings as the other files.
+
+  VC++Files/mysqldemb/mysqldemb.dsp@1.12, 2006-07-17 20:40:39+02:00, joerg@trift2. +4 -0
+    Add "sql/sql_locale.cpp" with similar settings as the other files.
+
+  VC++Files/mysqldemb/mysqldemb.vcproj@1.3, 2006-07-17 20:40:39+02:00, joerg@trift2. +36 -0
+    Add "sql/sql_locale.cpp" with similar settings as the other files.
+
+  VC++Files/mysqldemb/mysqldemb_ia64.dsp@1.2, 2006-07-17 20:40:39+02:00, joerg@trift2. +4 -0
+    Add "sql/sql_locale.cpp" with similar settings as the other files.
+
+  VC++Files/sql/mysqld.dsp@1.36, 2006-07-17 20:40:39+02:00, joerg@trift2. +4 -0
+    Add "sql/sql_locale.cpp" with similar settings as the other files.
+
+  VC++Files/sql/mysqld.vcproj@1.3, 2006-07-17 20:40:39+02:00, joerg@trift2. +76 -0
+    Add "sql/sql_locale.cpp" with similar settings as the other files.
+
+  VC++Files/sql/mysqld_ia64.dsp@1.3, 2006-07-17 20:40:39+02:00, joerg@trift2. +4 -0
+    Add "sql/sql_locale.cpp" with similar settings as the other files.
+
+  VC++Files/sql/mysqldmax.dsp@1.6, 2006-07-17 20:40:39+02:00, joerg@trift2. +16 -0
+    Add "sql/sql_locale.cpp" with similar settings as the other files.
+
+  VC++Files/sql/mysqldmax_ia64.dsp@1.3, 2006-07-17 20:40:39+02:00, joerg@trift2. +25 -0
+    Add "sql/sql_locale.cpp" with similar settings as the other files.
+
+  sql/sql_locale.cc@1.2, 2006-07-17 20:40:39+02:00, joerg@trift2. +109 -109
+    When initializing a boolean variable, do not use stringrepresentations '"false"' and '"true"' 
+    but rather the boolean values 'false' and 'true'.
+
+ChangeSet@1.2517, 2006-07-17 19:38:46+02:00, joerg@trift2. +1 -0
+  strings/strtod.c  :  Ensure the definition of "EOVERFLOW" is available.
+  In 5.0, this is already solved, so that is a null-merge ("ul").
+
+  strings/strtod.c@1.18, 2006-07-17 19:38:44+02:00, joerg@trift2. +1 -1
+    This file needs the definition of "EOVERFLOW",
+    which is on some platforms (Windows, OpenBSD) provided only by "my_base.h".
+    As this in turn includes "my_global.h", the include file name can be changed.
+
+ChangeSet@1.2510.28.1, 2006-07-14 16:26:58+05:00, ramil@mysql.com +7 -0
+  --{skip-}merge option added which allows the user to disable merge engine and
+  to avoid the potential security problem.
+  (see bug #15195: Security Breach with MERGE table)
+
+  mysql-test/r/warnings.result@1.32, 2006-07-14 16:26:50+05:00, ramil@mysql.com +7 -0
+    --{skip-}merge option added which allows the user to disable merge engine and
+    to avoid the potential security problem.
+    (see bug #15195: Security Breach with MERGE table)
+
+  mysql-test/t/warnings-master.opt@1.3, 2006-07-14 16:26:51+05:00, ramil@mysql.com +1 -1
+    --{skip-}merge option added which allows the user to disable merge engine and
+    to avoid the potential security problem.
+    (see bug #15195: Security Breach with MERGE table)
+
+  mysql-test/t/warnings.test@1.22, 2006-07-14 16:26:51+05:00, ramil@mysql.com +4 -0
+    --{skip-}merge option added which allows the user to disable merge engine and
+    to avoid the potential security problem.
+    (see bug #15195: Security Breach with MERGE table)
+
+  sql/handler.cc@1.172, 2006-07-14 16:26:51+05:00, ramil@mysql.com +2 -2
+    --{skip-}merge option added which allows the user to disable merge engine and
+    to avoid the potential security problem.
+    (see bug #15195: Security Breach with MERGE table)
+
+  sql/mysql_priv.h@1.379, 2006-07-14 16:26:51+05:00, ramil@mysql.com +1 -1
+    --{skip-}merge option added which allows the user to disable merge engine and
+    to avoid the potential security problem.
+    (see bug #15195: Security Breach with MERGE table)
+
+  sql/mysqld.cc@1.614, 2006-07-14 16:26:51+05:00, ramil@mysql.com +10 -2
+    --{skip-}merge option added which allows the user to disable merge engine and
+    to avoid the potential security problem.
+    (see bug #15195: Security Breach with MERGE table)
+
+  sql/set_var.cc@1.184, 2006-07-14 16:26:52+05:00, ramil@mysql.com +1 -0
+    --{skip-}merge option added which allows the user to disable merge engine and
+    to avoid the potential security problem.
+    (see bug #15195: Security Breach with MERGE table)
+
+ChangeSet@1.2510.26.2, 2006-07-13 09:04:06+02:00, tnurnberg@mysql.com +3 -0
+  Bug#20432: mysql client interprets commands in comments
+  
+  do not look for client-specific commands while inside a multi-line comment.
+  we will allow multi-comments pretty much anywhere within SQL-statements,
+  but client-specific commands (help, use, print, ...) must be the first token
+  in the input.
+
+  client/mysql.cc@1.219, 2006-07-13 09:04:04+02:00, tnurnberg@mysql.com +1 -1
+    Bug#20432: mysql client interprets commands in comments
+
+  mysql-test/r/mysql_client.result@1.1, 2006-07-13 09:04:04+02:00, tnurnberg@mysql.com +4 -0
+    Bug#20432: mysql client interprets commands in comments
+    test client-side parsing of comments and client-specific commands
+
+  mysql-test/r/mysql_client.result@1.0, 2006-07-13 09:04:04+02:00, tnurnberg@mysql.com +0 -0
+
+  mysql-test/t/mysql_client.test@1.1, 2006-07-13 09:04:04+02:00, tnurnberg@mysql.com +29 -0
+    Bug#20432: mysql client interprets commands in comments
+    test client-side parsing of comments and client-specific commands
+
+  mysql-test/t/mysql_client.test@1.0, 2006-07-13 09:04:04+02:00, tnurnberg@mysql.com +0 -0
+
+ChangeSet@1.2510.26.1, 2006-07-11 13:06:29-04:00, cmiller@zippy.(none) +3 -0
+  Bug#20729: Bad date_format() call makes mysql server crash
+      
+  The problem is that the author used the wrong function to send a warning to the 
+  user about truncation of data.  push_warning() takes a constant string and 
+  push_warning_printf() takes a format and variable arguments to fill it.
+  
+  Since the string we were complaining about contains percent characters, the 
+  printf() code interprets the "%Y" et c. that the user sends.  That's wrong, and
+  often causes a crash, especially if the date mentions seconds, "%s".
+  
+  A alternate fix would be to use  push_warning_printf(..., "%s", warn_buff) .
+
+  mysql-test/r/date_formats.result@1.20.1.1, 2006-07-11 13:06:28-04:00, cmiller@zippy.(none) +6 -0
+    Test that an invalid date doesn't crash the server.  We should get a warning back 
+    instead of a dead socket.
+
+  mysql-test/t/date_formats.test@1.17.1.1, 2006-07-11 13:06:28-04:00, cmiller@zippy.(none) +7 -1
+    Test that an invalid date doesn't crash the server.  We should get a warning back 
+    instead of a dead socket.
+
+  sql/time.cc@1.53, 2006-07-11 13:06:28-04:00, cmiller@zippy.(none) +1 -1
+    Don't try to use warn_buf as the start of a varible arguement list to send 
+    to a warning-formatted my_vsnprintf() .
+
+ChangeSet@1.2510.1.22, 2006-07-10 12:05:51+02:00, pekka@orca.ndb.mysql.com +1 -0
+  ndb - bug#20847: non-debug compile fix
+
+  ndb/src/kernel/blocks/dbtup/DbtupMeta.cpp@1.10, 2006-07-10 12:04:48+02:00, pekka@orca.ndb.mysql.com +4 -0
+    non-debug compile fix
+
+ChangeSet@1.2510.25.1, 2006-07-10 00:26:26+03:00, aelkin@dsl-hkigw8-feb1fb00-100.dhcp.inet.fi +1 -0
+  BUG#20919 temp tables closing fails when binlog is off
+  closing temp tables through end_thread
+  had a flaw in binlog-off branch of close_temporary_tables where
+  next table to close was reset via table->next
+   for (table= thd->temporary_tables; table; table= table->next)
+  which was wrong since the current table instance got destoyed at
+  	close_temporary(table, 1);
+  
+  The fix adapts binlog-on branch method to engage the loop's internal 'next' variable which holds table->next prior table's destoying.
+  
+
+  sql/sql_base.cc@1.272, 2006-07-10 00:26:24+03:00, aelkin@dsl-hkigw8-feb1fb00-100.dhcp.inet.fi +5 -3
+    no-binlog branch is fixed: scanning across temporary_tables must be careful to save next table since the current is being destroyed inside of close_temporary. 
+    binlog-is-open case is ok.
+
+ChangeSet@1.1346.1.839, 2006-07-07 16:47:57-04:00, cmiller@zippy.(none) +1 -0
+  Add a more reliable "getconf" test for Linuxthreads.  The later trees should already
+  have a better test (and so this should be null-merged there).
+  
+  ALSO!  Make it so that it accepts NPTL as a valid _equivalent_ implementation.
+
+  configure.in@1.191.1.145, 2006-07-07 16:47:56-04:00, cmiller@zippy.(none) +15 -6
+    Add a more reliable "getconf" test for Linuxthreads.  The later trees should already
+    have a better test (and so this should be null-merged there).
+    
+    ALSO!  Make it so that it accepts NPTL as a valid _equivalent_ implementation.
+
+ChangeSet@1.2510.1.20, 2006-07-07 10:57:22+02:00, pekka@mysql.com +6 -0
+  ndb - bug#20847 : DbtupTabDesMan: add merge with left buddies
+
+  ndb/src/kernel/blocks/ERROR_codes.txt@1.18, 2006-07-07 10:55:55+02:00, pekka@mysql.com +3 -1
+    DbtupTabDesMan: add merge with left buddies
+
+  ndb/src/kernel/blocks/dbtup/Dbtup.hpp@1.21, 2006-07-07 10:55:56+02:00, pekka@mysql.com +6 -3
+    DbtupTabDesMan: add merge with left buddies
+
+  ndb/src/kernel/blocks/dbtup/DbtupMeta.cpp@1.9, 2006-07-07 10:55:57+02:00, pekka@mysql.com +7 -0
+    DbtupTabDesMan: add merge with left buddies
+
+  ndb/src/kernel/blocks/dbtup/DbtupTabDesMan.cpp@1.4, 2006-07-07 10:55:57+02:00, pekka@mysql.com +136 -30
+    DbtupTabDesMan: add merge with left buddies
+
+  ndb/test/ndbapi/testDict.cpp@1.19, 2006-07-07 10:55:58+02:00, pekka@mysql.com +101 -0
+    DbtupTabDesMan: add merge with left buddies
+
+  ndb/test/run-test/daily-basic-tests.txt@1.33, 2006-07-07 10:55:58+02:00, pekka@mysql.com +4 -0
+    DbtupTabDesMan: add merge with left buddies
+
+ChangeSet@1.2510.24.1, 2006-07-06 23:59:04+04:00, konstantin@bodhi.netgear +6 -0
+  A fix and a test case for Bug#19399 "res 'Lost Connection' when 
+  dropping/creating tables".
+  
+  The bug could lead to a crash when multi-delete statements were
+  prepared and used with temporary tables.
+  
+  The bug was caused by lack of clean-up of multi-delete tables before
+  re-execution of a prepared statement. In a statement like
+  DELETE t1 FROM t1, t2 WHERE ... the first table list (t1) is
+  moved to lex->auxilliary_table_list and excluded from lex->query_tables
+  or select_lex->tables. Thus it was unaccessible to reinit_stmt_before_use
+  and not cleaned up before re-execution of a prepared statement. 
+
+  mysql-test/r/ps.result@1.50, 2006-07-06 23:59:01+04:00, konstantin@bodhi.netgear +14 -0
+    Updated test results (Bug#19399)
+
+  mysql-test/t/ps.test@1.51, 2006-07-06 23:59:01+04:00, konstantin@bodhi.netgear +25 -0
+    A test case for Bug#19399 "Stored Procedures 'Lost Connection' when 
+    dropping/creating tables": test that multi-delete
+    tables are cleaned up properly before re-execution.
+
+  sql/sql_lex.cc@1.154, 2006-07-06 23:59:01+04:00, konstantin@bodhi.netgear +1 -0
+    Always initialize auxilliary_table_list when we initialize the lex:
+    this way we don't have to check that lex->sql_command equals to
+    SQLCOM_DELETE_MULTI whenever we need to access auxilliary_table_list.
+    In particular, in reinit_stmt_before_use we can simply check that
+    auxilliary_table_list is not NULL and clean it up if the check returns
+    a true value.
+
+  sql/sql_prepare.cc@1.158, 2006-07-06 23:59:01+04:00, konstantin@bodhi.netgear +13 -7
+    Move the one table clean-up functionality to a method of st_table_list.
+    Clean up auxiliary_table_list if it's not empty.
+
+  sql/table.cc@1.134.1.1, 2006-07-06 23:59:01+04:00, konstantin@bodhi.netgear +17 -0
+    Implement st_table_list::reinit_before_use().
+
+  sql/table.h@1.76, 2006-07-06 23:59:01+04:00, konstantin@bodhi.netgear +5 -0
+    Declare st_table_list::reinit_before_use().
+
+ChangeSet@1.2510.12.3, 2006-07-06 15:18:00+02:00, tomas@poseidon.ndb.mysql.com +1 -0
+  backport of ndb DictCache fix
+  - don't invalidate tables that are in state RETRIEVING
+
+  ndb/src/ndbapi/DictCache.cpp@1.15, 2006-07-06 15:17:53+02:00, tomas@poseidon.ndb.mysql.com +8 -5
+    backport of ndb DictCache fix
+    - don't invalidate tables that are in state RETRIEVING
+
+ChangeSet@1.2510.19.3, 2006-07-05 17:18:59-07:00, acurtis@xiphis.org +3 -0
+  Bug#8706
+    "temporary table with data directory option fails"
+    myisam should not use user-specified table name when creating
+    temporary tables and use generated connection specific real name.
+    Test included.
+
+  myisam/mi_create.c@1.47.1.1, 2006-07-05 17:18:56-07:00, acurtis@xiphis.org +29 -7
+    Bug#8706
+      When creating a temporary table with directory override, ensure that
+      the real filename is using the hidden temporary name otherwise
+      multiple clients cannot have same named temporary tables without
+      conflict.
+
+  mysql-test/r/myisam.result@1.62, 2006-07-05 17:18:56-07:00, acurtis@xiphis.org +21 -0
+    Bug#8706
+      Test for bug
+
+  mysql-test/t/myisam.test@1.48, 2006-07-05 17:18:56-07:00, acurtis@xiphis.org +31 -0
+    Bug#8706
+      Test for bug
+
+ChangeSet@1.2510.1.19, 2006-07-04 15:11:11+02:00, pekka@clam.ndb.mysql.com +1 -0
+  ndb - bug#20847 fix (4.1)
+
+  ndb/src/kernel/blocks/dbtup/DbtupTabDesMan.cpp@1.3, 2006-07-04 15:09:39+02:00, pekka@clam.ndb.mysql.com +3 -2
+    DROP did not do merge with right buddies
+
+ChangeSet@1.2510.19.1, 2006-07-04 17:40:40+05:00, bar@mysql.com +13 -0
+  WL#2928 Date Translation NRE
+  
+  (implemented by by Josh Chamas)
+
+  BitKeeper/etc/ignore@1.235, 2006-07-04 17:40:16+05:00, bar@mysql.com +1 -0
+    Added libmysqld/sql_locale.cc to the ignore list
+
+  libmysqld/Makefile.am@1.62, 2006-07-04 17:40:15+05:00, bar@mysql.com +1 -1
+    Adding new source file
+
+  mysql-test/r/date_formats.result@1.21, 2006-07-04 17:40:15+05:00, bar@mysql.com +16 -0
+    Adding test case
+
+  mysql-test/t/date_formats.test@1.18, 2006-07-04 17:40:15+05:00, bar@mysql.com +14 -0
+    Adding test case
+
+  sql/Makefile.am@1.116, 2006-07-04 17:40:15+05:00, bar@mysql.com +1 -1
+    Adding new source file
+
+  sql/item_timefunc.cc@1.104, 2006-07-04 17:40:16+05:00, bar@mysql.com +38 -28
+    Using current locale data, instead of hard coded English names.
+
+  sql/mysql_priv.h@1.378, 2006-07-04 17:40:16+05:00, bar@mysql.com +18 -0
+    Adding new type MY_LOCALE, and declaring new global variables.
+
+  sql/set_var.cc@1.183, 2006-07-04 17:40:16+05:00, bar@mysql.com +43 -0
+    Adding "lc_time_names" system variable.
+
+  sql/set_var.h@1.61, 2006-07-04 17:40:16+05:00, bar@mysql.com +21 -0
+    Adding "lc_time_names" system variable.
+
+  sql/sql_cache.cc@1.97, 2006-07-04 17:40:16+05:00, bar@mysql.com +2 -0
+    Adding lc_time_names as a query cache flag.
+
+  sql/sql_class.cc@1.207, 2006-07-04 17:40:16+05:00, bar@mysql.com +1 -0
+    Setting default locale to en_US
+
+  sql/sql_class.h@1.286, 2006-07-04 17:40:16+05:00, bar@mysql.com +3 -0
+    Adding locale variable into system_variables.
+
+  sql/sql_locale.cc@1.1, 2006-07-04 17:40:16+05:00, bar@mysql.com +1607 -0
+    Adding new file with locale data for various languages
+
+  sql/sql_locale.cc@1.0, 2006-07-04 17:40:16+05:00, bar@mysql.com +0 -0
+    BitKeeper file /usr/home/bar/mysql-4.1.lc/sql/sql_locale.cc
+
+ChangeSet@1.2510.1.18, 2006-07-04 13:51:35+02:00, pekka@clam.ndb.mysql.com +1 -0
+  pekka - checkout:get (4.1)
+
+  BitKeeper/etc/config@1.18, 2006-07-04 13:50:36+02:00, pekka@clam.ndb.mysql.com +1 -0
+    checkout:get
+
+ChangeSet@1.1346.1.838, 2006-07-01 14:31:52-04:00, cmiller@zippy.(none) +4 -0
+  Bug#19006: 4.0 valgrind problems (in test func_str)
+  
+  On exactly-sized Strings, the String::c_ptr() function peeked beyond the
+  end of the buffer, possibly into unititialized space to see whether the 
+  buffer was NUL-terminated.
+  
+  In a place that did peek improperly, we now use a c_ptr_safe() function, 
+  which doesn't peek where it shouldn't.
+
+  client/sql_string.h@1.6.1.1, 2006-07-01 14:31:45-04:00, cmiller@zippy.(none) +8 -0
+    Back-port String::c_ptr_safe().
+
+  sql/item_func.h@1.39.1.28, 2006-07-01 14:31:45-04:00, cmiller@zippy.(none) +4 -1
+    Describe side-effect behavior.
+
+  sql/item_strfunc.cc@1.36.1.52, 2006-07-01 14:31:45-04:00, cmiller@zippy.(none) +2 -2
+    Use the "_safe" version of c_ptr to avoid looking for a terminating 
+    NUL character outside the initialized memory area.  Valgrind hates it 
+    when one does that, and it theoretically could lead to a SEGV.
+
+  sql/sql_string.h@1.13.1.1, 2006-07-01 14:31:45-04:00, cmiller@zippy.(none) +8 -0
+    Back-port String::c_ptr_safe().
+
+ChangeSet@1.2510.13.3, 2006-06-30 18:29:27+03:00, monty@mysql.com +3 -0
+  Reverted wrong bug fix (Bug#11228)
+
+  mysql-test/r/key.result@1.27, 2006-06-30 18:29:25+03:00, monty@mysql.com +9 -1
+    Fixed result after removing wrong bug fix
+
+  mysql-test/t/key.test@1.24, 2006-06-30 18:29:25+03:00, monty@mysql.com +1 -0
+    Added SHOW CREATE TABLE, which is the proper way to check for table definitions
+
+  sql/table.cc@1.135, 2006-06-30 18:29:25+03:00, monty@mysql.com +21 -0
+    Reverted wrong bug fix.
+    The intention with the original code was to show that MySQL treats the first
+    given unique key as a primary key. Clients can use the marked primary key as a
+    real primary key to validate row changes in case of conflicting updates.  The
+    ODBC driver (and other drivers) may also use this fact to optimize/check
+    updates and handle conflicts.  The marked key also shows what some engines, like InnoDB or NDB,
+    will use as it's internal primary key.
+    
+    For checking if someone has declared a true PRIMARY KEY, one should use 'SHOW CREATE TABLE'
+    
+    
+    
+
+ChangeSet@1.2510.12.2, 2006-06-30 16:25:07+02:00, tomas@poseidon.ndb.mysql.com +1 -0
+  adopted ndb handler code for tables without primary key and with unique index
+  - added missing retrieval of hidden primary key
+
+  sql/ha_ndbcluster.cc@1.188.1.1, 2006-06-30 16:25:03+02:00, tomas@poseidon.ndb.mysql.com +6 -0
+    adopted ndb handler code for tables without primary key and with unique index
+    - added missing retrieval of hidden primary key
+
+ChangeSet@1.2510.15.1, 2006-06-30 12:52:05+04:00, kroki@mysql.com +2 -0
+  bug #20152: mysql_stmt_execute() overwrites parameter buffers
+  
+  When using a parameter bind MYSQL_TYPE_DATE in a prepared statement,
+  the time part of the MYSQL_TIME buffer was written to zero in
+  mysql_stmt_execute(). The param_store_date() function in libmysql.c
+  worked directly on the provided buffer.
+  Changed to use a copy of the buffer.
+
+  libmysql/libmysql.c@1.302.1.1, 2006-06-30 12:51:59+04:00, kroki@mysql.com +3 -4
+    fix for bug #20152
+
+  tests/mysql_client_test.c@1.168, 2006-06-30 12:52:00+04:00, kroki@mysql.com +53 -0
+    added test for bug#20152
+
+ChangeSet@1.2453.44.13, 2006-06-30 09:41:41+02:00, jonas@perch.ndb.mysql.com +2 -0
+  ndb - bug#20774
+    crash if system restart with more than 4096 fragments
+    solution: continueb enable expand check loop
+
+  ndb/src/kernel/blocks/dblqh/Dblqh.hpp@1.31, 2006-06-30 09:41:39+02:00, jonas@perch.ndb.mysql.com +1 -0
+    continueb enable expand check loop
+
+  ndb/src/kernel/blocks/dblqh/DblqhMain.cpp@1.63, 2006-06-30 09:41:40+02:00, jonas@perch.ndb.mysql.com +41 -13
+    continueb enable expand check loop
+
+ChangeSet@1.2510.14.1, 2006-06-30 09:05:12+04:00, sergefp@mysql.com +3 -0
+  BUG#16168: Wrong results from range optimizer, "Use_count: Wrong count for key ..." warnings:
+   - Added comments.
+   - Make SEL_ARG::clone() set SEL_ARG::elements in the created copy.
+
+  mysql-test/r/range.result@1.35, 2006-06-30 09:05:08+04:00, sergefp@mysql.com +22 -0
+    BUG#16168: Testcase
+
+  mysql-test/t/range.test@1.31, 2006-06-30 09:05:08+04:00, sergefp@mysql.com +26 -0
+    BUG#16168: Testcase
+
+  sql/opt_range.cc@1.145.1.1, 2006-06-30 09:05:09+04:00, sergefp@mysql.com +179 -4
+    BUG#16168: Wrong results from range optimizer, "Use_count: Wrong count for key ..." warnings:
+     - Added comments.
+     - Make SEL_ARG::clone() set SEL_ARG::elements in the created copy.
+
+ChangeSet@1.2510.13.2, 2006-06-30 04:10:27+03:00, monty@mysql.com +4 -0
+  Don't read ~/.my.cnf in mysqldump.test
+
+  heap/hp_test1.c@1.16, 2006-06-30 04:10:24+03:00, monty@mysql.com +1 -1
+    Changed type from last commit
+
+  mysql-test/mysql-test-run.sh@1.268, 2006-06-30 04:10:24+03:00, monty@mysql.com +7 -13
+    Fixed problem with running with --gdb and two masters
+    Don't disable ndb becasue we run gdb
+
+  mysql-test/t/mysqldump.test@1.45, 2006-06-30 04:10:24+03:00, monty@mysql.com +1 -1
+    Don't read ~/.my.cnf
+
+  sql/ha_ndbcluster.cc@1.189, 2006-06-30 04:10:24+03:00, monty@mysql.com +4 -2
+    Portability fix
+
+ChangeSet@1.2510.13.1, 2006-06-30 02:25:35+03:00, monty@mysql.com +5 -0
+  Fixed include file usage
+  hp_test2 now works again
+  Fixed wrong cast, which caused problems with gcc 4.0 and floats in prepared statements (Bug #19694)
+
+  heap/hp_test1.c@1.15, 2006-06-30 02:25:33+03:00, monty@mysql.com +2 -1
+    Portability fix
+
+  heap/hp_test2.c@1.22, 2006-06-30 02:25:33+03:00, monty@mysql.com +1 -0
+    Added max_table_size (fixes that hp_test2 works again)
+
+  include/my_global.h@1.104, 2006-06-30 02:25:33+03:00, monty@mysql.com +2 -2
+    Fixed wrong cast, which caused problems with gcc 4.0 (Bug #19694)
+
+  mysys/my_handler.c@1.22, 2006-06-30 02:25:33+03:00, monty@mysql.com +1 -0
+    Added missing include file
+
+  strings/strtod.c@1.17, 2006-06-30 02:25:33+03:00, monty@mysql.com +2 -2
+    Fixed include files
+
+ChangeSet@1.2510.12.1, 2006-06-29 20:55:21+02:00, tomas@poseidon.ndb.mysql.com +1 -0
+  Bug #19202 Incorrect errorhandling in select count(*) wrt temporary error
+
+  sql/ha_ndbcluster.cc@1.188, 2006-06-29 20:55:14+02:00, tomas@poseidon.ndb.mysql.com +59 -24
+    Bug #19202 Incorrect errorhandling in select count(*) wrt temporary error
+
+ChangeSet@1.2453.44.12, 2006-06-29 16:20:18+02:00, jonas@perch.ndb.mysql.com +1 -0
+  ndb - autotest
+    Fix testNodeRestart -n DuringLCP and others (add stopTest() at end of test :-))
+
+  ndb/test/ndbapi/testNodeRestart.cpp@1.23, 2006-06-29 16:20:16+02:00, jonas@perch.ndb.mysql.com +1 -0
+    Fix testNodeRestart -n DuringLCP and others
+
+ChangeSet@1.1346.875.1, 2006-06-28 18:55:30+02:00, ingo@mysql.com +2 -0
+  Bug#14400 - Query joins wrong rows from table which is subject of "concurrent insert"
+  
+  It was possible that fetching a record by an exact key value 
+  (including the record pointer) could return a record with a 
+  different key value. This happened only if a concurrent insert 
+  added a record with the searched key value after the fetching 
+  statement locked the table for read.
+  
+  The search succeded on the key value, but the record was
+  rejected as it was past the file length that was remembered
+  at start of the fetching statement. With other words it was 
+  rejected as being a concurrently inserted record.
+  
+  The action to recover from this problem was to fetch the 
+  record that is pointed at by the next key of the index. 
+  This was repeated until a record below the file length was 
+  found.
+  
+  I do now avoid this loop if an exact match was searched. 
+  If this match is beyond the file length, it is now treated 
+  as "key not found". There cannot be another key with the 
+  same record pointer.
+
+  myisam/mi_rkey.c@1.11.1.4, 2006-06-28 18:55:18+02:00, ingo@mysql.com +14 -2
+    Bug#14400 - Query joins wrong rows from table which is subject of "concurrent insert"
+    Added a check for exact key match before searching for
+    the next key that was not concurrently inserted. If an
+    exact key match finds a concurrently inserted row, this
+    must be treated as "key not found".
+
+  sql/sql_class.cc@1.71.1.43, 2006-06-28 18:55:18+02:00, ingo@mysql.com +3 -3
+    Bug#14400 - Query joins wrong rows from table which is subject of "concurrent insert"
+    Fixed some DBUG_ENTER strings.
+
+ChangeSet@1.2510.10.1, 2006-06-28 16:07:39+02:00, ingo@mysql.com +1 -0
+  Bug#19835 - Binary copy of corrupted tables crash the server when issuing a query
+  
+  A corrupt table with dynamic record format can crash the 
+  server when trying to select from it.
+          
+  I fixed the crash that resulted from the particular type 
+  of corruption that has been reported for this bug.
+  
+  No test case. To test it, one needs a table with a very special
+  corruption. The bug report contains a file with such a table.
+
+  myisam/mi_dynrec.c@1.38, 2006-06-28 16:06:59+02:00, ingo@mysql.com +3 -0
+    Bug#19835 - Binary copy of corrupted tables crash the server when issuing a query
+    Added a protection against corrupted records. A dynamic 
+    record header with invalid 'next' pointer could trigger 
+    the assert in _mi_get_block_info(). Now I avoid this by 
+    reporting a corruption error.
+
+ChangeSet@1.2510.9.1, 2006-06-28 16:28:29+03:00, gkodinov@mysql.com +5 -0
+  gcc 4.1 linux warning fixes backported from 5.0.
+
+  sql/item_cmpfunc.h@1.116, 2006-06-28 16:28:25+03:00, gkodinov@mysql.com +14 -0
+    gcc 4.1 linux warning fixes backported from 5.0
+
+  sql/opt_range.cc@1.146, 2006-06-28 16:28:25+03:00, gkodinov@mysql.com +2 -2
+    gcc 4.1 linux warning fixes.
+
+  sql/spatial.h@1.16, 2006-06-28 16:28:25+03:00, gkodinov@mysql.com +4 -0
+    gcc 4.1 linux warning fixes backported from 5.0
+
+  sql/sql_select.h@1.81, 2006-06-28 16:28:25+03:00, gkodinov@mysql.com +1 -1
+    gcc 4.1 linux warning fixes.
+
+  sql/sql_update.cc@1.155, 2006-06-28 16:28:25+03:00, gkodinov@mysql.com +1 -1
+    gcc 4.1 linux warning fixes.
+
+ChangeSet@1.2510.8.1, 2006-06-28 14:27:37+02:00, ingo@mysql.com +6 -0
+  Bug#17877 - Corrupted spatial index
+  
+  CHECK TABLE could complain about a fully intact spatial index.
+  A wrong comparison operator was used for table checking. 
+  The result was that it checked for non-matching spatial keys. 
+  This succeeded if at least two different keys were present, 
+  but failed if only the matching key was present.
+  
+  I fixed the key comparison.
+
+  myisam/mi_check.c@1.158, 2006-06-28 14:27:33+02:00, ingo@mysql.com +3 -2
+    Bug#17877 - Corrupted spatial index
+    Fixed the comparison operator for checking a spatial index.
+    Using MBR_EQUAL | MBR_DATA to compare for equality and
+    include the data pointer in the comparison. The latter
+    finds the index entry that points to the current record.
+    This is necessary for non-unique indexes.
+    
+    The old operator, SEARCH_SAME, is unknown to the rtree
+    search functions and handled like MBR_DISJOINT.
+
+  myisam/mi_key.c@1.38, 2006-06-28 14:27:33+02:00, ingo@mysql.com +1 -1
+    Bug#17877 - Corrupted spatial index
+    Added a missing DBUG_RETURN.
+
+  myisam/rt_index.c@1.17, 2006-06-28 14:27:33+02:00, ingo@mysql.com +5 -3
+    Bug#17877 - Corrupted spatial index
+    Included the data pointer in the copy of the search key.
+    This is necessary for searching the index entry that points
+    to a specific record if the search_flag contains MBR_DATA.
+
+  myisam/rt_mbr.c@1.10, 2006-06-28 14:27:33+02:00, ingo@mysql.com +5 -1
+    Bug#17877 - Corrupted spatial index
+    Extended the RT_CMP() macro with an assert for an 
+    unexpected comparison operator.
+
+  mysql-test/r/gis-rtree.result@1.13, 2006-06-28 14:27:33+02:00, ingo@mysql.com +40 -0
+    Bug#17877 - Corrupted spatial index
+    The test result.
+
+  mysql-test/t/gis-rtree.test@1.13, 2006-06-28 14:27:33+02:00, ingo@mysql.com +44 -0
+    Bug#17877 - Corrupted spatial index
+    The test case.
+
+ChangeSet@1.2472.2.3, 2006-06-28 21:52:24+10:00, stewart@mysql.com +1 -0
+  BUG#19894 Data nodes fail during loading data if NoOfFragmentLogFiles=1
+  
+  change default minimum to 3
+  
+  bug is *very* timing dependent, unable to reproduce here, but theoretically possible.
+
+  ndb/src/mgmsrv/ConfigInfo.cpp@1.62.1.1, 2006-06-28 21:52:20+10:00, stewart@mysql.com +1 -1
+    change minimum NoOfFragmentLogFiles to 3
+
+ChangeSet@1.2510.4.2, 2006-06-27 18:07:23-04:00, iggy@mysql.com +2 -0
+  Bug#19298 mysqld_safe still uses obsolete --skip-locking parameter
+
+  configure.in@1.412, 2006-06-27 18:07:19-04:00, iggy@mysql.com +4 -4
+    Replaced skip-locking with newer skip-external-locking option.  Removed extra quotes.
+
+  scripts/mysqld_safe-watch.sh@1.6, 2006-06-27 18:07:20-04:00, iggy@mysql.com +2 -2
+    Replaced skip-locking with newer skip-external-locking option.
+
+ChangeSet@1.2510.3.7, 2006-06-27 22:22:43+05:00, svoj@may.pils.ru +2 -0
+  BUG#1662 - ALTER TABLE LIKE ignores DATA/INDEX DIRECTPORY
+  Produce a warning if DATA/INDEX DIRECTORY is specified in
+  ALTER TABLE statement.
+  
+  Ignoring of these options is documented in the symbolic links
+  section of the manual.
+
+  mysql-test/r/symlink.result@1.21, 2006-06-27 22:22:34+05:00, svoj@may.pils.ru +6 -0
+    Modified test result according to fix for BUG#1662.
+
+  sql/sql_parse.cc@1.483, 2006-06-27 22:22:34+05:00, svoj@may.pils.ru +6 -0
+    Produce a warning if DATA/INDEX DIRECTORY is specified in
+    ALTER TABLE statement.
+
+ChangeSet@1.1346.874.1, 2006-06-27 18:17:53+02:00, joerg@mysql.com +1 -0
+  Move "mysqldumpslow" from the client RPM to the server RPM (bug#20216).
+
+  support-files/mysql.spec.sh@1.61.1.36, 2006-06-27 18:17:51+02:00, joerg@mysql.com +5 -1
+    Move "mysqldumpslow" from the client RPM to the server RPM (bug#20216).
+
+ChangeSet@1.2510.3.6, 2006-06-27 19:33:59+04:00, kroki@mysql.com +5 -0
+  Dec. 31st, 9999 is still a valid date, only starting with Jan 1st 10000 things become invalid (Bug #12356)
+
+  mysql-test/r/func_sapdb.result@1.10, 2006-06-27 19:33:53+04:00, kroki@mysql.com +6 -0
+    test cases for date range edge cases added
+
+  mysql-test/r/func_time.result@1.42, 2006-06-27 19:33:53+04:00, kroki@mysql.com +6 -0
+    test cases for date range edge cases added
+
+  mysql-test/t/func_sapdb.test@1.9, 2006-06-27 19:33:53+04:00, kroki@mysql.com +2 -0
+    test cases for date range edge cases added
+
+  mysql-test/t/func_time.test@1.37, 2006-06-27 19:33:53+04:00, kroki@mysql.com +6 -0
+    test cases for date range edge cases added
+
+  sql/item_timefunc.cc@1.103, 2006-06-27 19:33:53+04:00, kroki@mysql.com +6 -5
+    Dec. 31st, 9999 is still a valid date, only starting with Jan 1st 10000 things become invalid (Bug #12356)
+
+ChangeSet@1.2510.6.1, 2006-06-27 17:40:19+03:00, gkodinov@mysql.com +3 -0
+  Bug #16458: Simple SELECT FOR UPDATE causes "Result Set not updatable" error
+  'SELECT DISTINCT a,b FROM t1' should not use temp table if there is unique 
+  index (or primary key) on a.
+  There are a number of other similar cases that can be calculated without the
+  use of a temp table : multi-part unique indexes, primary keys or using GROUP BY 
+  instead of DISTINCT.
+  When a GROUP BY/DISTINCT clause contains all key parts of a unique
+  index, then it is guaranteed that the fields of the clause will be
+  unique, therefore we can optimize away GROUP BY/DISTINCT altogether.
+  This optimization has two effects:
+  * there is no need to create a temporary table to compute the
+     GROUP/DISTINCT operation (or the temporary table will be smaller if only GROUP 
+     is removed and DISTINCT stays or if DISTINCT is removed and GROUP BY stays)
+  * this causes the statement in effect to become updatable in Connector/Java
+  because the result set columns will be direct reference to the primary key of 
+  the table (instead to the temporary table that it currently references). 
+  
+  Implemented a check that will optimize away GROUP BY/DISTINCT for queries like 
+  the above.
+  Currently it will work only for single non-constant table in the FROM clause.
+
+  mysql-test/r/distinct.result@1.33, 2006-06-27 17:40:15+03:00, gkodinov@mysql.com +51 -0
+    Bug #16458: Simple SELECT FOR UPDATE causes "Result Set not updatable" error
+      - test case
+
+  mysql-test/t/distinct.test@1.18, 2006-06-27 17:40:15+03:00, gkodinov@mysql.com +28 -0
+    Bug #16458: Simple SELECT FOR UPDATE causes "Result Set not updatable" error
+      - test case
+
+  sql/sql_select.cc@1.457, 2006-06-27 17:40:15+03:00, gkodinov@mysql.com +168 -0
+    Bug #16458: Simple SELECT FOR UPDATE causes "Result Set not updatable" error
+      - disable GROUP BY if contains the fields of a unique index.
+
+ChangeSet@1.2510.5.1, 2006-06-27 11:26:41+02:00, ingo@mysql.com +2 -0
+  Bug#11824 - internal /tmp/*.{MYD,MYI} files remain, causing subsequent queries to fail
+  
+  Very complex select statements can create temporary tables
+  that are too big to be represented as a MyISAM table.
+  
+  This was not checked at table creation time, but only at
+  open time. The result was an attempt to delete the 
+  "impossible" table.
+  
+  But if the server is built --with-raid, MyISAM tries to 
+  open the table before deleting the files. It needs to find 
+  out if the table uses the raid support and how many raid 
+  chunks there are. This is done with an open "for repair",
+  which will almost always succeed.
+  
+  But in this case we have an "impossible" table. The open
+  failed. Hence the files were not deleted. Also the error
+  message was a bit unspecific.
+  
+  I turned an open error in this situation into the assumption 
+  of having no raid support on the table. Thus the normal data 
+  file is tried to be deleted. This may however leave existing 
+  raid chunks behind.
+  
+  I also added a check in mi_create() to prevent the creation
+  of an "impossible" table. A more decriptive error message is
+  given in this case.
+  
+  No test case. The required select statement is way too
+  large for the test suite. I added a test script to the
+  bug report.
+
+  myisam/mi_create.c@1.48, 2006-06-27 11:26:29+02:00, ingo@mysql.com +17 -0
+    Bug#11824 - internal /tmp/*.{MYD,MYI} files remain, causing subsequent queries to fail
+    Added a check to mi_create() that the table description
+    header of the index file does not exceed 64KB. The header
+    has only 16 bits to encode its length.
+
+  myisam/mi_delete_table.c@1.10, 2006-06-27 11:26:29+02:00, ingo@mysql.com +18 -6
+    Bug#11824 - internal /tmp/*.{MYD,MYI} files remain, causing subsequent queries to fail
+    Interpret error in table open as not having a raid
+    configuration on the tbale. Thus try to delete the
+    normal data file, but leave behind raid chunks if 
+    they exist.
+
+ChangeSet@1.1346.1.837, 2006-06-26 23:44:17+02:00, kent@mysql.com +2 -0
+  make_sharedlib_distribution.sh:
+    For compatibility, don't use {..,..} in pattern matching
+  make_binary_distribution.sh:
+    Added .dylib and .sl as shared library extensions
+
+  scripts/make_binary_distribution.sh@1.49.1.14, 2006-06-26 23:42:36+02:00, kent@mysql.com +14 -4
+    Added .dylib and .sl as shared library extensions
+
+  scripts/make_sharedlib_distribution.sh@1.2.1.1, 2006-06-26 23:43:50+02:00, kent@mysql.com +4 -2
+    For compatibility, don't use {..,..} in pattern matching
+
+ChangeSet@1.2453.44.11, 2006-06-26 12:16:39+02:00, jonas@perch.ndb.mysql.com +2 -0
+  ndb - bug#20683
+    part 1 - make sure return code is propagated from request tracker
+
+  ndb/src/kernel/vm/RequestTracker.hpp@1.2, 2006-06-26 12:16:37+02:00, jonas@perch.ndb.mysql.com +2 -2
+    propagate return value
+
+  ndb/src/kernel/vm/SafeCounter.hpp@1.2, 2006-06-26 12:16:37+02:00, jonas@perch.ndb.mysql.com +14 -8
+    make sure object is not initialized in case of seize() failure, to make sure destructor doesnt assert
+
+ChangeSet@1.2510.3.2, 2006-06-23 13:19:30+05:00, bar@mysql.com +3 -0
+  Bug#11228: DESC shows arbitrary column as "PRI"
+    An UNIQUE KEY consisting of NOT NULL columns
+    was displayed as PRIMARY KEY in "DESC t1".
+    According to the code, that was intentional
+    behaviour for some reasons unknown to me.
+    This code was written before bitkeeper time,
+    so I cannot check who and why made this.
+    After discussing on dev-public, a decision
+    was made to remove this code
+
+  mysql-test/r/key.result@1.26, 2006-06-23 13:19:24+05:00, bar@mysql.com +10 -0
+    Adding test case.
+
+  mysql-test/t/key.test@1.23, 2006-06-23 13:19:24+05:00, bar@mysql.com +11 -0
+    Adding test case.
+
+  sql/table.cc@1.134, 2006-06-23 13:19:24+05:00, bar@mysql.com +0 -21
+    Removing old wrong code
+
+ChangeSet@1.2510.1.7, 2006-06-22 20:39:46-07:00, igor@rurik.mysql.com +2 -0
+  Added a test case for bug #18359.
+  This was another manifestation of the problems fixed in the
+  patch for bug 16674.
+  Wrong calculation of length of the search prefix in the pattern
+  string led here to a wrong result set for a query in 4.1. 
+  The bug could be demonstrated for any multi-byte character set. 
+
+  mysql-test/r/ctype_utf8.result@1.73, 2006-06-22 20:39:40-07:00, igor@rurik.mysql.com +56 -0
+    Added a test case for bug #18359.
+
+  mysql-test/t/ctype_utf8.test@1.75, 2006-06-22 20:39:40-07:00, igor@rurik.mysql.com +31 -0
+    Added a test case for bug #18359.
+
+ChangeSet@1.2510.1.6, 2006-06-22 15:50:15-07:00, igor@rurik.mysql.com +3 -0
+  Fixed bug #20076.
+  Server crashed in some cases when a query required a MIN/MAX
+  agrregation for a 'ucs2' field. 
+  In these cases  the aggregation caused calls of the function
+  update_tmptable_sum_func that indirectly invoked 
+  the method Item_sum_hybrid::min_max_update_str_field() 
+  containing a call to strip_sp for a ucs2 character set.
+  The latter led directly to the crash as it used my_isspace
+  undefined for the ucs2 character set.
+  Actually the call of strip_sp is not needed at all in this
+  situation and has been removed by the fix.
+
+  mysql-test/r/ctype_ucs.result@1.30, 2006-06-22 15:50:11-07:00, igor@rurik.mysql.com +7 -0
+    Added a test case for bug #20076.
+
+  mysql-test/t/ctype_ucs.test@1.30, 2006-06-22 15:50:11-07:00, igor@rurik.mysql.com +12 -0
+    Added a test case for bug #20076.
+
+  sql/item_sum.cc@1.148, 2006-06-22 15:50:11-07:00, igor@rurik.mysql.com +0 -1
+    Fixed bug #20076.
+    Server crashed in some cases when a query required a MIN/MAX
+    agrregation for a 'ucs2' field. 
+    In these cases  the aggregation caused calls of the function
+    update_tmptable_sum_func that indirectly invoked 
+    the method Item_sum_hybrid::min_max_update_str_field() 
+    containing a call to strip_sp for a ucs2 character set.
+    The latter led directly to the crash as it used my_isspace
+    undefined for the ucs2 character set.
+    Actually the call of strip_sp is not needed at all in this
+    situation and has been removed by the fix.
+
+ChangeSet@1.2510.3.1, 2006-06-23 00:37:31+02:00, kent@mysql.com +1 -0
+  mysql.spec.sh:
+    Disable the simplistic auto dependency scan for test/bench (bug#20078)
+
+  support-files/mysql.spec.sh@1.119, 2006-06-19 21:36:57+02:00, kent@mysql.com +1 -0
+    Disable the simplistic auto dependency scan for test/bench (bug#20078)
+
+ChangeSet@1.2506.6.1, 2006-06-22 22:11:27+05:00, holyfoot@deer.(none) +3 -0
+  bug #10166 (Signed byte values cause data to be padded)
+  
+  The AsBinary function returns VARCHAR data type with binary collation.
+  It can cause problem for clients that treat that kind of data as
+  different from BLOB type.
+  So now AsBinary returns BLOB.
+
+  mysql-test/r/gis.result@1.22, 2006-06-22 22:10:40+05:00, holyfoot@mysql.com +10 -0
+    result fixed
+
+  mysql-test/t/gis.test@1.20, 2006-06-22 22:10:40+05:00, holyfoot@mysql.com +7 -0
+    test case added
+
+  sql/item_geofunc.h@1.10, 2006-06-22 22:10:40+05:00, holyfoot@mysql.com +2 -0
+    Now we return MYSQL_TYPE_BLOB for asBinary function
+
+ChangeSet@1.2453.44.10, 2006-06-22 12:03:28+02:00, jonas@perch.ndb.mysql.com +1 -0
+  ndb - bug#19164
+    set max value on ports
+
+  ndb/src/mgmsrv/ConfigInfo.cpp@1.63, 2006-06-22 12:03:26+02:00, jonas@perch.ndb.mysql.com +7 -6
+    set max vlue on ports
+
+ChangeSet@1.2510.1.5, 2006-06-21 22:39:48-07:00, igor@rurik.mysql.com +2 -0
+  Modified the test case for bug 16674 to have the same
+  execution plans in 4.1 and 5.0.
+
+  mysql-test/r/ctype_utf8.result@1.72, 2006-06-21 22:39:43-07:00, igor@rurik.mysql.com +10 -4
+    Modified the test case for bug 16674 to have the same
+    execution plans in 4.1 and 5.0. 
+
+  mysql-test/t/ctype_utf8.test@1.74, 2006-06-21 22:39:43-07:00, igor@rurik.mysql.com +2 -0
+    Modified the test case for bug 16674 to have the same
+    execution plans in 4.1 and 5.0.
+
+ChangeSet@1.2510.2.2, 2006-06-22 00:29:04+04:00, evgen@moonbone.local +3 -0
+  Fixed bug #14896.
+  This bug in Field_string::cmp resulted in a wrong comparison 
+  with keys in partial indexes over multi-byte character fields.
+  Given field a is declared as a varchar(16) collate utf8_unicode_ci
+  INDEX(a(4)) gives us an example of such an index.
+    
+  Wrong key comparisons could lead to wrong result sets if 
+  the selected query execution plan used a range scan by 
+  a partial index over a utf8 character field.
+  This also caused wrong results in many other cases.
+
+  mysql-test/r/ctype_utf8.result@1.69.1.1, 2006-06-22 00:12:27+04:00, evgen@moonbone.local +40 -0
+    Added test cases for bug #14896.
+
+  mysql-test/t/ctype_utf8.test@1.71.1.1, 2006-06-22 00:11:55+04:00, evgen@moonbone.local +26 -0
+    Added test cases for bug #14896.
+
+  sql/field.cc@1.231, 2006-06-22 00:12:40+04:00, evgen@moonbone.local +7 -13
+    Fixed bug #14896.
+    This bug in Field_string::cmp resulted in a wrong comparison 
+    with keys in partial indexes over multi-byte character fields.
+    Given field a is declared as a varchar(16) collate utf8_unicode_ci
+    INDEX(a(4)) gives us an example of such an index.
+         
+    Wrong key comparisons could lead to wrong result sets if 
+    the selected query execution plan used a range scan by 
+    a partial index over a utf8 character field.
+    This also caused wrong results in many other cases.  
+
+ChangeSet@1.2510.2.1, 2006-06-21 16:41:07+02:00, tomas@poseidon.ndb.mysql.com +1 -0
+  added missing MYSQLTEST_VARDIR declaration
+
+  mysql-test/mysql-test-run.sh@1.267, 2006-06-21 16:41:03+02:00, tomas@poseidon.ndb.mysql.com +2 -1
+    added missing MYSQLTEST_VARDIR declaration
+
+ChangeSet@1.2501.2.1, 2006-06-21 17:30:59+05:00, svoj@may.pils.ru +3 -0
+  BUG#20357 - Got error 124 from storage engine using MIN and MAX
+              functions in queries
+  
+  Using MAX()/MIN() on table with disabled indexes (by ALTER TABLE)
+  results in error 124 (wrong index) from storage engine.
+  
+  The problem was that optimizer use disabled index to optimize
+  MAX()/MIN(). Normally it must skip disabled index and perform
+  table scan.
+  
+  This patch skips disabled indexes for min/max optimization.
+
+  mysql-test/r/myisam.result@1.59.1.1, 2006-06-21 17:30:54+05:00, svoj@may.pils.ru +13 -0
+    Test case for BUG#20357.
+
+  mysql-test/t/myisam.test@1.45.1.1, 2006-06-21 17:30:55+05:00, svoj@may.pils.ru +12 -0
+    Test case for BUG#20357.
+
+  sql/opt_sum.cc@1.45.1.1, 2006-06-21 17:30:55+05:00, svoj@may.pils.ru +6 -0
+    Skip disabled/ignored indexes for min/max optimization.
+
+ChangeSet@1.2453.44.9, 2006-06-21 14:00:26+02:00, jonas@perch.ndb.mysql.com +1 -0
+  ndb - bug#20197
+    also close scan which are in "delivered" state, as it's impossible to release locks afterwards
+  
+    backport from 5.1
+
+  ndb/src/kernel/blocks/dbtc/DbtcMain.cpp@1.67, 2006-06-21 14:00:24+02:00, jonas@perch.ndb.mysql.com +12 -0
+    ndb - bug#20197
+      also close scan which are in "delivered" state, as it's impossible to release locks afterwards
+
+ChangeSet@1.2511, 2006-06-21 00:12:23-07:00, igreenhoe@mysql.com +2 -0
+  Fix for bug #15977 (switch ordering of DISABLE KEYS/LOCK TABLE in mysqldump)
+
+  client/mysqldump.c@1.201, 2006-06-21 00:12:17-07:00, igreenhoe@mysql.com +13 -10
+    Fix for bug #15977 (switch ordering of DISABLE KEYS/LOCK TABLE in mysqldump)
+
+  mysql-test/r/mysqldump.result@1.54, 2006-06-21 00:12:18-07:00, igreenhoe@mysql.com +34 -52
+    Fix for bug #15977 (switch ordering of DISABLE KEYS/LOCK TABLE in mysqldump)
+
+ChangeSet@1.2506.5.1, 2006-06-20 19:57:21-07:00, igor@rurik.mysql.com +3 -0
+  Fixed bug #16674.
+  The length of the prefix of the pattern string in the LIKE predicate that 
+  determined the index range to be scanned was calculated incorrectly for
+  multi-byte character sets. 
+  As a result of this in 4. 1 the the scanned range was wider then necessary
+  if the prefix contained not only one-byte characters.  
+  In 5.0 additionally it caused missing some rows from the result set.
+
+  mysql-test/r/ctype_utf8.result@1.70, 2006-06-20 19:57:17-07:00, igor@rurik.mysql.com +67 -0
+    Added test cases for bug #16674.
+
+  mysql-test/t/ctype_utf8.test@1.72, 2006-06-20 19:57:17-07:00, igor@rurik.mysql.com +55 -0
+    Added test cases for bug #16674.
+
+  strings/ctype-mb.c@1.42, 2006-06-20 19:57:17-07:00, igor@rurik.mysql.com +16 -9
+    Fixed bug #16674.
+    The length of the prefix of the pattern string in the LIKE predicate that 
+    determined the index range to be scanned was calculated incorrectly for
+    multi-byte character sets. 
+    As a result of this in 4. 1 the the scanned range was wider then necessary
+    if the prefix contained not only one-byte characters.  
+    In 5.0 additionally it caused missing some rows from the result set.
+        
+    The function my_like_range_mb was fixed to calculate the length of
+    the prefix in a pattern string correctly in all cases.
+
+ChangeSet@1.2506.1.4, 2006-06-20 23:05:55+04:00, evgen@moonbone.local +3 -0
+  select.result:
+    Added test case for bug#18759 Incorrect string to numeric conversion.  
+  select.test:
+    Added test case for bug#18759 Incorrect string to numeric conversion.
+  item_cmpfunc.cc:
+    Cleanup after fix for bug#18360 removal
+
+  mysql-test/r/select.result@1.75, 2006-06-20 23:05:00+04:00, evgen@moonbone.local +6 -0
+    Added test case for bug#18759 Incorrect string to numeric conversion.  
+
+  mysql-test/t/select.test@1.58, 2006-06-20 23:03:49+04:00, evgen@moonbone.local +19 -0
+    Added test case for bug#18759 Incorrect string to numeric conversion.
+
+  sql/item_cmpfunc.cc@1.212, 2006-06-20 23:03:16+04:00, evgen@moonbone.local +2 -1
+    Cleanup after fix for bug#18360 removal
+
+ChangeSet@1.2506.3.1, 2006-06-20 00:50:09+04:00, evgen@moonbone.local +3 -0
+  item_cmpfunc.cc, func_in.result, func_in.test:
+    Reverted fix for bug#18360
+
+  mysql-test/r/func_in.result@1.18, 2006-06-20 00:34:36+04:00, evgen@moonbone.local +0 -21
+    Reverted fix for bug#18360
+
+  mysql-test/t/func_in.test@1.18, 2006-06-20 00:33:17+04:00, evgen@moonbone.local +0 -12
+    Reverted fix for bug#18360
+
+  sql/item_cmpfunc.cc@1.211, 2006-06-20 00:36:48+04:00, evgen@moonbone.local +8 -20
+    Reverted fix for bug#18360
+
+ChangeSet@1.2497.1.1, 2006-06-19 22:11:01+05:00, holyfoot@deer.(none) +5 -0
+  bug #20318 (ctype_ucs2_def test fails with embedded)
+  there was two problems about charsets in embedded server
+  1. mysys/charset.c - defined there default_charset_info variable is
+  modified by both server and client code (particularly when
+  --default-charset option is handled)
+  In embedded server we get two codelines modifying one variable.
+  I created separate default_client_charset_info for client code
+  
+  2. mysql->charset and mysql->options.charset initialization isn't
+  properly done for embedded server - necessary calls added
+
+  include/sql_common.h@1.14.1.1, 2006-06-19 22:10:15+05:00, holyfoot@mysql.com +1 -0
+    client charset info default declared
+
+  libmysqld/lib_sql.cc@1.125.1.1, 2006-06-19 22:10:15+05:00, holyfoot@mysql.com +7 -0
+    thd_init_client_charset calls added
+
+  libmysqld/libmysqld.c@1.65.1.1, 2006-06-19 22:10:15+05:00, holyfoot@mysql.com +3 -45
+    check_embedded_connection moved to client.c to avoid code duplication
+
+  sql-common/client.c@1.88.1.1, 2006-06-19 22:10:15+05:00, holyfoot@mysql.com +48 -36
+    charset initialization moved to mysql_init_character_set to
+    be used in embedded server
+
+  sql/sql_parse.cc@1.480.2.1, 2006-06-19 22:10:15+05:00, holyfoot@mysql.com +32 -27
+    thread client charset initialization moved to thd_init_client_charset
+    to avoid code duplication
+
+ChangeSet@1.2481.12.1, 2006-06-19 13:22:42+03:00, gkodinov@mysql.com +3 -0
+  * Bug #9676: INSERT INTO x SELECT .. FROM x LIMIT 1; slows down with big
+                tables
+  Currently in INSERT ... SELECT ... LIMIT ... the compiler uses a 
+  temporary table to store the results of SELECT ... LIMIT .. and then
+  uses that table as a source for INSERT. The problem is that in some cases
+  it actually skips the LIMIT clause in doing that and materializes the 
+  whole SELECT result set regardless of the LIMIT.
+  This fix is limiting the process of filling up the temp table with only 
+  that much rows that will be actually used by propagating the LIMIT value.
+
+  mysql-test/r/insert_select.result@1.30, 2006-06-19 13:22:38+03:00, gkodinov@mysql.com +4 -0
+    * Bug #9676: INSERT INTO x SELECT .. FROM x LIMIT 1; slows down with big
+                  tables
+    - a test demonstrating the code path
+
+  mysql-test/t/insert_select.test@1.24, 2006-06-19 13:22:38+03:00, gkodinov@mysql.com +13 -0
+    * Bug #9676: INSERT INTO x SELECT .. FROM x LIMIT 1; slows down with big
+                  tables
+    - a test demonstrating the code path
+
+  sql/sql_select.cc@1.456, 2006-06-19 13:22:38+03:00, gkodinov@mysql.com +8 -4
+    * Bug #9676: INSERT INTO x SELECT .. FROM x LIMIT 1; slows down with big
+                  tables
+    - pass through the real LIMIT number if the temp table is created for
+      buffering results.
+    - set the counter for all the cases when the temp table is not used for
+      grouping
+
+ChangeSet@1.2492.2.1, 2006-06-19 14:05:14+05:00, svoj@may.pils.ru +3 -0
+  BUG#18036 - update of table joined to self reports table as crashed
+  Certain updates of table joined to self results in unexpected
+  behavior.
+  
+  The problem was that record cache was mistakenly enabled for
+  self-joined table updates. Normally record cache must be disabled
+  for such updates.
+  
+  Fixed wrong condition in code that determines whether to use
+  record cache for self-joined table updates.
+  
+  Only MyISAM tables were affected.
+
+  mysql-test/r/myisam.result@1.60, 2006-06-19 14:05:09+05:00, svoj@may.pils.ru +8 -0
+    Test case for BUG#18036.
+
+  mysql-test/t/myisam.test@1.46, 2006-06-19 14:05:10+05:00, svoj@may.pils.ru +9 -0
+    Test case for BUG#18036.
+
+  sql/sql_update.cc@1.154, 2006-06-19 14:05:10+05:00, svoj@may.pils.ru +1 -1
+    Fixed wrong condition in code that determines whether to use
+    record cache for self-joined table updates.
+
+ChangeSet@1.2507, 2006-06-19 13:03:29+05:00, ramil@mysql.com +2 -0
+  Fix for bug #20496: func_time.test failure                                      
+
+  mysql-test/r/func_time.result@1.41, 2006-06-19 13:03:24+05:00, ramil@mysql.com +10 -3
+    Fix for bug #20496: func_time.test failure                                      
+      - floating point calculations removed.                                                  
+
+  mysql-test/t/func_time.test@1.36, 2006-06-19 13:03:24+05:00, ramil@mysql.com +4 -2
+    Fix for bug #20496: func_time.test failure                                      
+      - floating point calculations removed.                                                  
+
+ChangeSet@1.2505, 2006-06-17 15:37:23+02:00, kent@mysql.com +2 -0
+  Makefile.am:
+    Avoid error message trying 'windoze-dsp' in obsolete directory
+  compile-dist:
+    Avoid error message for target 'distclean' and no Makefile
+
+  BUILD/compile-dist@1.6, 2006-06-17 15:21:57+02:00, kent@mysql.com +1 -1
+    Avoid error message for target 'distclean' and no Makefile
+
+  ndb/Makefile.am@1.13, 2006-06-17 15:33:11+02:00, kent@mysql.com +2 -1
+    Avoid error message trying 'windoze-dsp' in obsolete directory
+
+ChangeSet@1.2504, 2006-06-17 11:33:34+02:00, kent@mysql.com +1 -0
+  make_win_src_distribution.sh:
+    Make output less verbose
+    Make temporary directory name unique
+    Remove temporary directory on interrupt
+
+  scripts/make_win_src_distribution.sh@1.39, 2006-06-17 11:32:20+02:00, kent@mysql.com +6 -11
+    Make output less verbose
+    Make temporary directory name unique
+    Remove temporary directory on interrupt
+
+ChangeSet@1.2503, 2006-06-17 03:04:43+02:00, kent@mysql.com +1 -0
+  make_win_src_distribution.sh:
+    Include "sql_yacc.yy" for completeness (bug#20387)
+
+  scripts/make_win_src_distribution.sh@1.38, 2006-06-17 03:00:42+02:00, kent@mysql.com +33 -16
+    Include "sql_yacc.yy" for completeness (bug#20387)
+    Improved error handling
+    Don't list all files packed with tar/zip unless debugging
+
+ChangeSet@1.2502, 2006-06-16 22:29:52+02:00, kent@mysql.com +2 -0
+  .del-mysql_install.def~8da659e7c0f7e571:
+    Delete: netware/mysql_install.def
+  Makefile.am:
+    Removed obsolete "mysql_install.def"
+
+  BitKeeper/deleted/.del-mysql_install.def~8da659e7c0f7e571@1.4, 2006-06-16 22:27:15+02:00, kent@mysql.com +0 -0
+    Delete: netware/mysql_install.def
+
+  netware/Makefile.am@1.15, 2006-06-16 22:26:13+02:00, kent@mysql.com +2 -2
+    Removed obsolete "mysql_install.def"
+
+ChangeSet@1.2481.6.4, 2006-06-16 23:46:37+04:00, evgen@moonbone.local +2 -0
+  item_strfunc.cc:
+    Fix for bug#16716 for --ps-protocol mode.
+  item_cmpfunc.cc:
+    Fix for a memory allocation/freeing problem in agg_cmp_type() after fix
+  for bug#16377. Few language corrections.
+
+  sql/item_cmpfunc.cc@1.210, 2006-06-16 23:41:19+04:00, evgen@moonbone.local +11 -21
+    Fix for a memory allocation/freeing problem in agg_cmp_type(). Few language corrections.
+
+  sql/item_strfunc.cc@1.244, 2006-06-16 23:42:46+04:00, evgen@moonbone.local +2 -1
+    Fix for bug#16716 for --ps-protocol mode.
+
+ChangeSet@1.2481.3.6, 2006-06-15 16:39:18+04:00, evgen@moonbone.local +2 -0
+  item_cmpfunc.h, cast.result:
+    Post fix for bug#16377
+
+  mysql-test/r/cast.result@1.27, 2006-06-15 16:38:27+04:00, evgen@moonbone.local +1 -1
+    Post fix for bug#16377
+
+  sql/item_cmpfunc.h@1.115, 2006-06-15 16:38:50+04:00, evgen@moonbone.local +5 -10
+    Post fix for bug#16377
+
+ChangeSet@1.2472.2.2, 2006-06-14 20:22:03+02:00, tomas@poseidon.ndb.mysql.com +1 -0
+  Bug #19493 NDB does not ignore duplicate keys when using LOAD DATA LOCAL
+  - correction of backport error
+
+  sql/ha_ndbcluster.cc@1.179.1.4, 2006-06-14 20:21:59+02:00, tomas@poseidon.ndb.mysql.com +1 -1
+    Bug #19493 NDB does not ignore duplicate keys when using LOAD DATA LOCAL
+    - correction of backport error
+
+ChangeSet@1.2472.2.1, 2006-06-14 20:16:32+02:00, tomas@poseidon.ndb.mysql.com +3 -0
+  Bug #19493 NDB does not ignore duplicate keys when using LOAD DATA LOCAL
+  - make sure to disable bulk insert when check for duplicate key is needed
+
+  mysql-test/r/ndb_loaddatalocal.result@1.1, 2006-06-14 20:16:27+02:00, tomas@poseidon.ndb.mysql.com +46 -0
+    New BitKeeper file ``mysql-test/r/ndb_loaddatalocal.result''
+
+  mysql-test/r/ndb_loaddatalocal.result@1.0, 2006-06-14 20:16:27+02:00, tomas@poseidon.ndb.mysql.com +0 -0
+    BitKeeper file /home/tomas/mysql-4.1/mysql-test/r/ndb_loaddatalocal.result
+
+  mysql-test/t/ndb_loaddatalocal.test@1.1, 2006-06-14 20:16:28+02:00, tomas@poseidon.ndb.mysql.com +70 -0
+    New BitKeeper file ``mysql-test/t/ndb_loaddatalocal.test''
+
+  mysql-test/t/ndb_loaddatalocal.test@1.0, 2006-06-14 20:16:28+02:00, tomas@poseidon.ndb.mysql.com +0 -0
+    BitKeeper file /home/tomas/mysql-4.1/mysql-test/t/ndb_loaddatalocal.test
+
+  sql/ha_ndbcluster.cc@1.179.1.3, 2006-06-14 20:16:27+02:00, tomas@poseidon.ndb.mysql.com +18 -0
+    Bug #19493 NDB does not ignore duplicate keys when using LOAD DATA LOCAL
+    - make sure to disable bulk insert when check for duplicate key is needed
+
+ChangeSet@1.2481.7.7, 2006-06-14 21:06:02+04:00, sergefp@mysql.com +1 -0
+  Better comments in KEY_PART_INFO struct
+
+  sql/structs.h@1.43, 2006-06-14 21:05:59+04:00, sergefp@mysql.com +7 -1
+    Better comments in KEY_PART_INFO struct
+
+ChangeSet@1.2472.1.9, 2006-06-14 16:54:54+02:00, joerg@mysql.com +1 -0
+  support-files/mysql.server.sh  :  Fix the startup sequence.  bug#18810 + bug#20118
+
+  support-files/mysql.server.sh@1.40, 2006-06-14 16:54:50+02:00, joerg@mysql.com +1 -0
+    Ensure that some necessary / useful system services have been started already,
+    when the MySQL server is started. 
+    This fixes bug#18810 and bug#20118
+
+ChangeSet@1.2472.1.8, 2006-06-14 12:54:28+02:00, tomas@poseidon.ndb.mysql.com +1 -0
+   Bug #18595 repeated create, insert, drop can cause MySQL table definition cache to
+  corrupt
+    - add infinite retry on drop table temporary error
+
+  sql/ha_ndbcluster.cc@1.179.1.2, 2006-06-14 12:54:22+02:00, tomas@poseidon.ndb.mysql.com +27 -7
+     Bug #18595 repeated create, insert, drop can cause MySQL table definition cache to
+    corrupt
+      - add infinite retry on drop table temporary error
+
+ChangeSet@1.2481.11.1, 2006-06-13 19:09:24+04:00, evgen@moonbone.local +9 -0
+  Fixed bug#16377: result of DATE/TIME functions were compared as strings which
+  can lead to a wrong result.
+  
+  All date/time functions has the STRING result type thus their results are
+  compared as strings. The string date representation allows a user to skip 
+  some of leading zeros. This can lead to wrong comparison result if a date/time 
+  function result is compared to such a string constant.
+  
+  The idea behind this bug fix is to compare results of date/time functions
+  and data/time constants as ints, because that date/time representation is 
+  more exact. To achieve this the agg_cmp_type() is changed to take in the
+  account that a date/time field or an date/time item should be compared 
+  as ints.
+  
+  This bug fix is partially back ported from 5.0.
+  
+  The agg_cmp_type() function now accepts THD as one of parameters. 
+  In addition, it now checks if a date/time field/function is present in the
+  list. If so, it tries to coerce all constants to INT to make date/time
+  comparison return correct result. The field for the constant coercion is
+  taken from the Item_field or constructed from the Item_func. In latter case
+  the constructed field will be freed after conversion of all constant items.
+  Otherwise the result is same as before - aggregated with help of the
+  item_cmp_type() function.
+  
+  From the Item_func_between::fix_length_and_dec() function removed the part
+  which was converting date/time constants to int if possible. Now this is 
+  done by the agg_cmp_type() function.
+  
+  The new function result_as_longlong() is added to the Item class. 
+  It indicates that the item is a date/time item and result of it can be
+  compared as int. Such items are date/time fields/functions.
+  
+  Correct val_int() methods are implemented for classes Item_date_typecast, 
+  Item_func_makedate, Item_time_typecast, Item_datetime_typecast. All these
+  classes are derived from Item_str_func and Item_str_func::val_int() converts
+  its string value to int without regard to the date/time type of these items.
+  
+  Arg_comparator::set_compare_func() and Arg_comparator::set_cmp_func()
+  functions are changed to substitute result type of an item with the INT_RESULT
+  if the item is a date/time item and another item is a constant. This is done
+  to get a correct result of comparisons like date_time_function() = string_constant.
+
+  mysql-test/r/cast.result@1.26, 2006-06-13 18:23:26+04:00, evgen@moonbone.local +1 -1
+    Fixed wrong test case result after bug fix#16377.
+
+  mysql-test/r/func_time.result@1.38.1.1, 2006-06-13 19:08:21+04:00, evgen@moonbone.local +41 -0
+    Added test case fot bug#16377: result of DATE/TIME functions were compared as strings which
+    can lead to a wrong result.
+
+  mysql-test/t/func_time.test@1.33.1.1, 2006-06-13 19:08:10+04:00, evgen@moonbone.local +20 -0
+    Added test case fot bug#16377: result of DATE/TIME functions were compared as strings which
+    can lead to a wrong result.
+
+  sql/field.cc@1.230, 2006-06-13 18:26:08+04:00, evgen@moonbone.local +11 -5
+    Fixed bug#16377: result of DATE/TIME functions were compared as strings which
+    can lead to a wrong result.
+    Field::set_warning(), Field::set_datetime_warning() now use current_thd to get thd if table isn't set.
+
+  sql/item.h@1.194, 2006-06-13 19:07:53+04:00, evgen@moonbone.local +16 -0
+    The new function result_as_longlong() is added to the Item class. 
+    It indicates that the item is a date/time item and result of it can be
+    compared as int. Such items are date/time fields/functions.
+
+  sql/item_cmpfunc.cc@1.209, 2006-06-13 19:04:46+04:00, evgen@moonbone.local +122 -32
+    Fixed bug#16377: result of DATE/TIME functions were compared as strings which
+    can lead to a wrong result.
+    The agg_cmp_type() function now accepts THD as one of parameters. 
+    In addition, it now checks if a date/time field/function is present in the
+    list. If so, it tries to coerce all constants to INT to make date/time
+    comparison return correct result. The field for the constant coercion is
+    taken from the Item_field or constructed from the Item_func. In latter case
+    the constructed field will be freed after conversion of all constant items.
+    Otherwise the result is same as before - aggregated with help of the
+    item_cmp_type() function.
+
+  sql/item_cmpfunc.h@1.114, 2006-06-13 18:24:34+04:00, evgen@moonbone.local +10 -4
+    Fixed bug#16377: result of DATE/TIME functions were compared as strings which
+    can lead to a wrong result.
+    Arg_comparator::set_compare_func() and Arg_comparator::set_cmp_func()
+    functions are changed to substitute result type of an item with the INT_RESULT
+    if the item is a date/time item and another item is a constant.
+
+  sql/item_timefunc.cc@1.100.1.1, 2006-06-13 18:24:14+04:00, evgen@moonbone.local +60 -0
+    Fixed bug#16377: result of DATE/TIME functions were compared as strings which
+    can lead to a wrong result.Correct val_int() methods are implemented for classes Item_date_typecast, 
+    Item_func_makedate, Item_time_typecast, Item_datetime_typecast.
+
+  sql/item_timefunc.h@1.56.1.1, 2006-06-13 18:23:53+04:00, evgen@moonbone.local +12 -0
+    Fixed bug#16377: result of DATE/TIME functions were compared as strings which
+    can lead to a wrong result.
+    The result_as_longlong() function is set to return TRUE for these classes:
+    Item_date, Item_date_func, Item_func_curtime, Item_func_sec_to_time,
+    Item_date_typecast, Item_time_typecast, Item_datetime_typecast,
+    Item_func_makedate.
+
+ChangeSet@1.1346.1.836, 2006-06-13 16:01:54+05:00, ramil@mysql.com +4 -0
+  Fix for bug #12728: Very strange behaviour of ELT
+
+  mysql-test/r/func_str.result@1.16.2.19, 2006-06-13 16:01:50+05:00, ramil@mysql.com +7 -0
+    Fix for bug #12728: Very strange behaviour of ELT
+      - test case
+
+  mysql-test/t/func_str.test@1.15.2.20, 2006-06-13 16:01:50+05:00, ramil@mysql.com +8 -0
+    Fix for bug #12728: Very strange behaviour of ELT
+      - test result
+
+  sql/item_strfunc.cc@1.36.1.51, 2006-06-13 16:01:50+05:00, ramil@mysql.com +11 -0
+    Fix for bug #12728: Very strange behaviour of ELT
+      - Item_func_elt::eq() introduced: check 'item' member as well
+        (to distinguish for instance elt(1, 'a', 'b') and elt(2, 'a', 'b')
+
+  sql/item_strfunc.h@1.15.1.12, 2006-06-13 16:01:50+05:00, ramil@mysql.com +1 -0
+    Fix for bug #12728: Very strange behaviour of ELT
+      - Item_func_elt::eq() introduced: check 'item' member as well
+        (to distinguish for instance elt(1, 'a', 'b') and elt(2, 'a', 'b')
+
+ChangeSet@1.2497, 2006-06-12 14:53:15+02:00, mskold@mysql.com +2 -0
+  Added order by
+
+  mysql-test/r/ndb_lock.result@1.8, 2006-06-12 14:52:40+02:00, mskold@mysql.com +4 -4
+    Added order by
+
+  mysql-test/t/ndb_lock.test@1.10, 2006-06-12 14:52:40+02:00, mskold@mysql.com +2 -2
+    Added order by
+
+ChangeSet@1.2472.1.7, 2006-06-12 13:06:56+02:00, tomas@poseidon.ndb.mysql.com +2 -0
+  Bug #20336 CLUSTERLOG commands have no effect
+  - always calculate max log level on node start
+  - send event subscribe uncond
+
+  ndb/src/mgmsrv/MgmtSrvr.cpp@1.76, 2006-06-12 13:06:52+02:00, tomas@poseidon.ndb.mysql.com +34 -25
+    Bug #20336 CLUSTERLOG commands have no effect
+    - always calculate max log level on node start
+    - send event subscribe uncond
+
+  ndb/src/mgmsrv/Services.cpp@1.42, 2006-06-12 13:06:52+02:00, tomas@poseidon.ndb.mysql.com +6 -7
+    Bug #20336 CLUSTERLOG commands have no effect
+    - always send log level update
+    
+
+ChangeSet@1.2488.1.4, 2006-06-12 09:28:27+02:00, mskold@mysql.com +2 -0
+  Added lock test on index scan
+
+  mysql-test/r/ndb_lock.result@1.7, 2006-06-12 09:28:13+02:00, mskold@mysql.com +51 -24
+    Added lock test on index scan
+
+  mysql-test/t/ndb_lock.test@1.9, 2006-06-12 09:28:13+02:00, mskold@mysql.com +39 -4
+    Added lock test on index scan
+
+ChangeSet@1.2488.1.3, 2006-06-12 09:27:04+02:00, mskold@mysql.com +1 -0
+  Moved back comment to  correct method
+
+  sql/ha_ndbcluster.cc@1.184, 2006-06-12 09:26:16+02:00, mskold@mysql.com +12 -5
+    Moved back comment to  correct method
+
+ChangeSet@1.2477.7.3, 2006-06-08 19:55:22+02:00, joerg@mysql.com +1 -0
+  mysql-test/mysql-test-run.pl  :  Output the usage error if one is given. (Found when fixing bug#20303)
+
+  mysql-test/mysql-test-run.pl@1.64.1.2, 2006-06-08 19:55:18+02:00, joerg@mysql.com +7 -0
+    Found when fixing bug#20303: The "usage()" function ignored the message it was given,
+    so we got no real indication about the problem. Print it if one is given.
+
+ChangeSet@1.2472.1.6, 2006-06-08 17:26:56+02:00, tomas@poseidon.ndb.mysql.com +4 -0
+  Bug #20336 CLUSTERLOG commands have no effect
+
+  ndb/src/kernel/blocks/cmvmi/Cmvmi.cpp@1.21, 2006-06-08 17:26:51+02:00, tomas@poseidon.ndb.mysql.com +3 -2
+    Bug #20336 CLUSTERLOG commands have no effect
+    - with signal sender the clock issuing the command and the revceiver of the events are not the same
+
+  ndb/src/mgmsrv/MgmtSrvr.cpp@1.75, 2006-06-08 17:26:51+02:00, tomas@poseidon.ndb.mysql.com +28 -27
+    Bug #20336 CLUSTERLOG commands have no effect
+    - make sure to actually send the update to ndb nodes, and wait for the reply
+
+  ndb/src/mgmsrv/MgmtSrvr.hpp@1.34, 2006-06-08 17:26:51+02:00, tomas@poseidon.ndb.mysql.com +0 -2
+    Bug #20336 CLUSTERLOG commands have no effect
+
+  ndb/src/mgmsrv/Services.cpp@1.41, 2006-06-08 17:26:51+02:00, tomas@poseidon.ndb.mysql.com +7 -5
+    Bug #20336 CLUSTERLOG commands have no effect
+    - make sure to compute max every time for log level
+
+ChangeSet@1.2488.1.2, 2006-06-08 16:12:38+02:00, mskold@mysql.com +10 -0
+  Fix for Bug #18184  SELECT ... FOR UPDATE does not work..: implemented ha_ndblcuster::unlock_row() and explicitly lock all rows that are not being unlocked
+
+  mysql-test/r/ndb_lock.result@1.6, 2006-06-08 16:12:07+02:00, mskold@mysql.com +59 -0
+    Fix for Bug #18184  SELECT ... FOR UPDATE does not work..: implemented ha_ndblcuster::unlock_row() and explicitly lock all rows that are not being unlocked
+
+  mysql-test/t/ndb_lock.test@1.8, 2006-06-08 16:12:08+02:00, mskold@mysql.com +76 -0
+    Fix for Bug #18184  SELECT ... FOR UPDATE does not work..: implemented ha_ndblcuster::unlock_row() and explicitly lock all rows that are not being unlocked
+
+  ndb/include/ndbapi/NdbIndexScanOperation.hpp@1.9, 2006-06-08 16:12:08+02:00, mskold@mysql.com +4 -3
+    Fix for Bug #18184  SELECT ... FOR UPDATE does not work..: implemented ha_ndblcuster::unlock_row() and explicitly lock all rows that are not being unlocked
+
+  ndb/include/ndbapi/NdbResultSet.hpp@1.6, 2006-06-08 16:12:08+02:00, mskold@mysql.com +21 -0
+    Fix for Bug #18184  SELECT ... FOR UPDATE does not work..: implemented ha_ndblcuster::unlock_row() and explicitly lock all rows that are not being unlocked
+
+  ndb/include/ndbapi/NdbScanOperation.hpp@1.21, 2006-06-08 16:12:08+02:00, mskold@mysql.com +4 -2
+    Fix for Bug #18184  SELECT ... FOR UPDATE does not work..: implemented ha_ndblcuster::unlock_row() and explicitly lock all rows that are not being unlocked
+
+  ndb/src/ndbapi/NdbResultSet.cpp@1.9, 2006-06-08 16:12:08+02:00, mskold@mysql.com +11 -0
+    Fix for Bug #18184  SELECT ... FOR UPDATE does not work..: implemented ha_ndblcuster::unlock_row() and explicitly lock all rows that are not being unlocked
+
+  ndb/src/ndbapi/NdbScanOperation.cpp@1.51, 2006-06-08 16:12:08+02:00, mskold@mysql.com +21 -9
+    Fix for Bug #18184  SELECT ... FOR UPDATE does not work..: implemented ha_ndblcuster::unlock_row() and explicitly lock all rows that are not being unlocked
+
+  ndb/src/ndbapi/ndberror.c@1.30, 2006-06-08 16:12:08+02:00, mskold@mysql.com +1 -1
+    Fix for Bug #18184  SELECT ... FOR UPDATE does not work..: implemented ha_ndblcuster::unlock_row() and explicitly lock all rows that are not being unlocked
+
+  sql/ha_ndbcluster.cc@1.183, 2006-06-08 16:12:08+02:00, mskold@mysql.com +70 -11
+    Fix for Bug #18184  SELECT ... FOR UPDATE does not work..: implemented ha_ndblcuster::unlock_row() and explicitly lock all rows that are not being unlocked
+
+  sql/ha_ndbcluster.h@1.59, 2006-06-08 16:12:09+02:00, mskold@mysql.com +2 -0
+    Fix for Bug #18184  SELECT ... FOR UPDATE does not work..: implemented ha_ndblcuster::unlock_row() and explicitly lock all rows that are not being unlocked
+
+ChangeSet@1.2477.7.2, 2006-06-08 14:52:33+02:00, joerg@mysql.com +1 -0
+  mysql-test/mysql-test-run.pl  :    A fix for bug#20303 "mysql-test-run.pl: Does not recognize -- argument"
+
+  mysql-test/mysql-test-run.pl@1.64.1.1, 2006-06-08 14:52:29+02:00, joerg@mysql.com +6 -0
+    A fix for bug#20303 "mysql-test-run.pl: Does not recognize -- argument":
+    Due to the use of 'pass_through' in option processing this lone '--' will remain
+    as an argument, it must be ignored explicitly.
+
+ChangeSet@1.2481.10.1, 2006-06-07 14:01:10+05:00, ramil@mysql.com +5 -0
+  Fix for bug #6880: LAST_INSERT_ID() within a statement
+
+  mysql-test/r/auto_increment.result@1.33, 2006-06-07 14:01:05+05:00, ramil@mysql.com +22 -0
+    Fix for bug #6880: LAST_INSERT_ID() within a statement
+      - test result
+
+  mysql-test/r/rpl_log.result@1.55, 2006-06-07 14:01:05+05:00, ramil@mysql.com +17 -0
+    Fix for bug #6880: LAST_INSERT_ID() within a statement
+      - test result
+
+  mysql-test/t/auto_increment.test@1.25, 2006-06-07 14:01:05+05:00, ramil@mysql.com +17 -0
+    Fix for bug #6880: LAST_INSERT_ID() within a statement
+      - test case
+
+  mysql-test/t/rpl_log.test@1.25, 2006-06-07 14:01:05+05:00, ramil@mysql.com +14 -0
+    Fix for bug #6880: LAST_INSERT_ID() within a statement
+      - test case
+
+  sql/item_func.cc@1.262, 2006-06-07 14:01:05+05:00, ramil@mysql.com +4 -3
+    Fix for bug #6880: LAST_INSERT_ID() within a statement
+      - return the first thd->last_insert_id set (within a query)
+
+ChangeSet@1.2470.5.2, 2006-06-06 23:05:10+04:00, aivanov@mysql.com +1 -0
+  Applied innodb-4.1-ss31 snapshot.
+   Fixed BUG#19727 "InnoDB crashed server and crashed tables
+   are not recoverable".
+
+  innobase/row/row0mysql.c@1.95, 2006-06-06 23:05:07+04:00, aivanov@mysql.com +10 -10
+    Applied innodb-4.1-ss31 snapshot.
+     Move trx_commit_for_mysql(trx) calls before calls to
+     row_mysql_unlock_data_dictionary(trx).
+
+ChangeSet@1.2491, 2006-06-06 09:59:45-07:00, igor@rurik.mysql.com +3 -0
+  Fixed some problems for Windows build
+
+  VC++Files/client/mysql.dsp@1.15, 2006-06-06 09:59:41-07:00, igor@rurik.mysql.com +4 -0
+    Fixed omission of mysys\my_conio.c.
+
+  VC++Files/client/mysql_ia64.dsp@1.3, 2006-06-06 09:59:41-07:00, igor@rurik.mysql.com +4 -0
+    Fixed omission of mysys\my_conio.c.
+
+  client/mysqldump.c@1.200, 2006-06-06 09:59:41-07:00, igor@rurik.mysql.com +2 -1
+    VS compiler does not accept variable declarations within blocks.
+    Such a behaviour complies with the Standard C.
+
+ChangeSet@1.2481.7.5, 2006-06-02 19:15:32-07:00, igor@rurik.mysql.com +1 -0
+  Cleanup for the fix of bug 18206.
+
+  sql/opt_sum.cc@1.47, 2006-06-02 19:15:28-07:00, igor@rurik.mysql.com +0 -4
+    Cleanup 
+
+ChangeSet@1.2481.9.1, 2006-06-02 14:14:57-07:00, igor@rurik.mysql.com +5 -0
+  Fixed bug #18206.
+  The bug report revealed two problems related to min/max optimization:
+  1. If the length of a constant key used in a SARGable condition for
+  for the MIN/MAX fields is greater than the length of the field an 
+  unwanted warning on key truncation is issued;
+  2. If MIN/MAX optimization is applied to a partial index, like INDEX(b(4))
+  than can lead to returning a wrong result set.
+
+  mysql-test/r/func_group.result@1.40, 2006-06-02 14:14:52-07:00, igor@rurik.mysql.com +24 -0
+    Added test cases for bug #18206.
+
+  mysql-test/t/func_group.test@1.33, 2006-06-02 14:14:52-07:00, igor@rurik.mysql.com +19 -0
+    Added test cases for bug #18206.
+
+  sql/opt_sum.cc@1.46, 2006-06-02 14:14:52-07:00, igor@rurik.mysql.com +14 -3
+    Fixed bug #18206.
+    Suppressed the warning about data truncation when store_val_in_field
+    was used to store keys for the field used in MIN/MAX optimization.
+    Blocked MIN/MAX optimization for partial keys, such as in INDEX(b(4)).
+
+  sql/sql_select.cc@1.455, 2006-06-02 14:14:52-07:00, igor@rurik.mysql.com +3 -3
+    Fixed bug #18206.
+    Added a parameter for the function store_val_in_field allowing to
+    control setting warnings about data truncation in the function.
+
+  sql/sql_select.h@1.80, 2006-06-02 14:14:52-07:00, igor@rurik.mysql.com +1 -1
+    Fixed bug #18206.
+    Added a parameter for the function store_val_in_field allowing to
+    control setting warnings about data truncation in the function.
+
+ChangeSet@1.2481.7.3, 2006-06-02 12:04:03+03:00, gkodinov@mysql.com +3 -0
+  Bug #4981: 4.x and 5.x produce non-optimal execution path, 
+          3.23 regression test failure
+  
+  The member SEL_ARG::min_flag was not initialized, 
+  due to which the condition for no GEOM_FLAG in function 
+  key_or did not choose "Range checked for each record" as 
+  the correct access method.
+
+  mysql-test/r/select.result@1.71.1.1, 2006-06-02 12:03:59+03:00, gkodinov@mysql.com +14 -0
+    testcase for 'Range checked' access method
+
+  mysql-test/t/select.test@1.54.1.1, 2006-06-02 12:03:59+03:00, gkodinov@mysql.com +14 -0
+    testcase for 'Range checked' access method
+
+  sql/opt_range.cc@1.145, 2006-06-02 12:03:59+03:00, gkodinov@mysql.com +1 -1
+    All of the class members initialized
+
+ChangeSet@1.2488.1.1, 2006-06-02 07:26:45+02:00, mskold@mysql.com +4 -0
+  Bug #18864  TRUNCATE TABLE doesn't reset AUTO_INCREMENT value on ndb table
+
+  mysql-test/r/ndb_truncate.result@1.2, 2006-06-02 07:25:57+02:00, mskold@mysql.com +16 -7
+    Bug #18864  TRUNCATE TABLE doesn't reset AUTO_INCREMENT value on ndb table
+
+  mysql-test/t/ndb_truncate.test@1.4, 2006-06-02 07:25:57+02:00, mskold@mysql.com +14 -9
+    Bug #18864  TRUNCATE TABLE doesn't reset AUTO_INCREMENT value on ndb table
+
+  sql/ha_ndbcluster.cc@1.182, 2006-06-02 07:25:57+02:00, mskold@mysql.com +6 -0
+    Bug #18864  TRUNCATE TABLE doesn't reset AUTO_INCREMENT value on ndb table
+
+  sql/handler.h@1.144, 2006-06-02 07:25:57+02:00, mskold@mysql.com +1 -2
+    Bug #18864  TRUNCATE TABLE doesn't reset AUTO_INCREMENT value on ndb table
+
+ChangeSet@1.2481.8.1, 2006-06-01 17:06:42+05:00, holyfoot@deer.(none) +8 -0
+  bug #16017 (memory leaks in embedded server)
+  
+  There actually was 3 different problems -
+  hash_user_connections wasn't cleaned
+  one strdupped database name wasn't freed
+  and stmt->mem_root wasn't cleaned as it was
+  replased with mysql->field_alloc for result
+  For the last one - i made the library using stmt's
+  fields to store result if it's the case.
+
+  include/mysql.h@1.143, 2006-06-01 17:05:55+05:00, holyfoot@mysql.com +14 -3
+    statement pointer added to the advanced_command to be checked in
+    embedded server
+
+  include/sql_common.h@1.15, 2006-06-01 17:05:55+05:00, holyfoot@mysql.com +2 -1
+    stmt added to the cli_advanced_command interface
+
+  libmysql/libmysql.c@1.303, 2006-06-01 17:05:55+05:00, holyfoot@mysql.com +7 -6
+    stmt pointer now sent to advanced_command
+
+  libmysqld/embedded_priv.h@1.13, 2006-06-01 17:05:55+05:00, holyfoot@mysql.com +3 -3
+    it's enough to send database name to check_embedded_connection
+
+  libmysqld/lib_sql.cc@1.126, 2006-06-01 17:05:55+05:00, holyfoot@mysql.com +31 -22
+    Now we store result directly in the MYSQL_STMT structure to
+    avoid extra copying
+
+  libmysqld/libmysqld.c@1.66, 2006-06-01 17:05:55+05:00, holyfoot@mysql.com +3 -6
+    it's enough to only send database pointer to check_embedded_connection
+
+  sql-common/client.c@1.89, 2006-06-01 17:05:55+05:00, holyfoot@mysql.com +2 -1
+    stmt fake attribute added to cli_advanced_command
+
+  sql/sql_parse.cc@1.480.1.1, 2006-06-01 17:05:55+05:00, holyfoot@mysql.com +12 -6
+    hash_user_connections isn't used if no access checks compiled
+
+ChangeSet@1.2453.44.8, 2006-06-01 08:24:05+02:00, jonas@perch.ndb.mysql.com +5 -0
+  ndb - bug#20185
+    Dont be too aggressive in Dbtc::nodeFailCheckTransaction
+    let it timeout by 1, so that it does not assert that it has waited too long
+    old impl. set timeotu value to 0, making timeout = (ctcTimer - 0) which could be quite big.
+
+  ndb/src/kernel/blocks/ERROR_codes.txt@1.17, 2006-06-01 08:24:02+02:00, jonas@perch.ndb.mysql.com +3 -0
+    error codes
+
+  ndb/src/kernel/blocks/dbdih/DbdihMain.cpp@1.37, 2006-06-01 08:24:02+02:00, jonas@perch.ndb.mysql.com +24 -0
+    2 new error inserts
+    7030 - delay in GCP_PREPARE until checkLocalNodefailComplete is true
+    7031 - delay in GCP_PREPARE and die
+
+  ndb/src/kernel/blocks/dbtc/DbtcMain.cpp@1.66, 2006-06-01 08:24:02+02:00, jonas@perch.ndb.mysql.com +5 -3
+    Dont set api con timer to 0, as this might trigger asserion in timeoutfound lab if state == PREPARE_TO_COMMIT
+
+  ndb/test/ndbapi/testNodeRestart.cpp@1.22, 2006-06-01 08:24:03+02:00, jonas@perch.ndb.mysql.com +56 -0
+    testcase
+
+  ndb/test/run-test/daily-basic-tests.txt@1.32, 2006-06-01 08:24:03+02:00, jonas@perch.ndb.mysql.com +4 -0
+    autotest
+
+ChangeSet@1.2488, 2006-05-31 15:07:11+02:00, mskold@mysql.com +2 -0
+  Removed dead code that had been commented out
+
+  ndb/src/ndbapi/NdbDictionaryImpl.cpp@1.56, 2006-05-31 15:06:54+02:00, mskold@mysql.com +1 -1
+    Removed dead code that had been commented out
+
+  ndb/src/ndbapi/NdbDictionaryImpl.hpp@1.23, 2006-05-31 15:06:54+02:00, mskold@mysql.com +0 -1
+    Removed dead code that had been commented out
+
+ChangeSet@1.2481.4.3, 2006-05-30 00:08:58-07:00, igor@rurik.mysql.com +33 -0
+  Fixed bug #17873: confusing error message when IGNORE/USE/FORCE INDEX
+  refers to a column name.
+
+  include/mysqld_error.h@1.109, 2006-05-30 00:08:49-07:00, igor@rurik.mysql.com +1 -1
+    Fixed bug #17873: confusing error message when IGNORE/USE/FORCE INDEX
+    refers to a column name.
+
+  include/sql_state.h@1.14, 2006-05-30 00:08:49-07:00, igor@rurik.mysql.com +0 -1
+    Fixed bug #17873: confusing error message when IGNORE/USE/FORCE INDEX
+    refers to a column name.
+
+  mysql-test/r/explain.result@1.17, 2006-05-30 00:08:49-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873: confusing error message when IGNORE/USE/FORCE INDEX
+    refers to a column name.
+
+  mysql-test/r/key_cache.result@1.17, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +1 -1
+    Fixed bug #17873: confusing error message when IGNORE/USE/FORCE INDEX
+    refers to a column name.
+
+  mysql-test/r/preload.result@1.9, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +1 -1
+    Fixed bug #17873: confusing error message when IGNORE/USE/FORCE INDEX
+    refers to a column name.
+
+  mysql-test/r/select.result@1.73, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +4 -4
+    Fixed bug #17873: confusing error message when IGNORE/USE/FORCE INDEX
+    refers to a column name.
+    Added a new test case.
+
+  mysql-test/t/explain.test@1.10, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873: confusing error message when IGNORE/USE/FORCE INDEX
+    refers to a column name.
+
+  mysql-test/t/select.test@1.56, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +4 -4
+    Fixed bug #17873: confusing error message when IGNORE/USE/FORCE INDEX
+    refers to a column name.
+    Added a new test case.
+
+  sql/share/czech/errmsg.txt@1.137, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/danish/errmsg.txt@1.133, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/dutch/errmsg.txt@1.137, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/english/errmsg.txt@1.151, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/estonian/errmsg.txt@1.135, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/french/errmsg.txt@1.136, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/german/errmsg.txt@1.131, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/greek/errmsg.txt@1.136, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.\
+
+  sql/share/hungarian/errmsg.txt@1.136, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/italian/errmsg.txt@1.141, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/japanese-sjis/errmsg.txt@1.5, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.\
+
+  sql/share/japanese/errmsg.txt@1.133, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/korean/errmsg.txt@1.135, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/norwegian-ny/errmsg.txt@1.135, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/norwegian/errmsg.txt@1.136, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/polish/errmsg.txt@1.135, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/portuguese/errmsg.txt@1.136, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/romanian/errmsg.txt@1.136, 2006-05-30 00:08:50-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/russian/errmsg.txt@1.131, 2006-05-30 00:08:51-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/serbian/errmsg.txt@1.83, 2006-05-30 00:08:51-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/slovak/errmsg.txt@1.136, 2006-05-30 00:08:51-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/spanish/errmsg.txt@1.137, 2006-05-30 00:08:51-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/swedish/errmsg.txt@1.137, 2006-05-30 00:08:51-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/share/ukrainian/errmsg.txt@1.97, 2006-05-30 00:08:51-07:00, igor@rurik.mysql.com +0 -1
+    Removed error message ER_INDEX_DOES_NOT_EXIST,
+    used ER_KEY_DOES_NOT_EXITS instead.
+
+  sql/sql_base.cc@1.271, 2006-05-30 00:08:51-07:00, igor@rurik.mysql.com +1 -1
+    Fixed bug #17873: confusing error message when IGNORE/USE/FORCE INDEX
+    refers to a column name.
+
+ChangeSet@1.2461.27.1, 2006-05-30 00:36:48+04:00, evgen@moonbone.local +3 -0
+  Fixed bug#18360: Incorrect type coercion in IN() results in false comparison
+  
+  The IN() function uses agg_cmp_type() to aggregate all types of its arguments
+  to find out some common type for comparisons. In this particular case the 
+  char() and the int was aggregated to double because char() can contain values
+  like '1.5'. But all strings which do not start from a digit are converted to
+  0. thus 'a' and 'z' become equal. 
+  This behaviour is reasonable when all function arguments are constants. But 
+  when there is a field or an expression this can lead to false comparisons. In
+  this case it makes more sense to coerce constants to the type of the field
+  argument.
+  
+  The agg_cmp_type() function now aggregates types of constant and non-constant
+  items separately. If some non-constant items will be found then their
+  aggregated type will be returned. Thus after the aggregation constants will be
+  coerced to the aggregated type. 
+
+  mysql-test/r/func_in.result@1.17, 2006-05-30 00:34:50+04:00, evgen@moonbone.local +21 -0
+    Added test case for bug#18360: Incorrect type coercion in IN() results in false comparison.
+
+  mysql-test/t/func_in.test@1.17, 2006-05-30 00:34:42+04:00, evgen@moonbone.local +12 -0
+    Added test case for bug#18360: Incorrect type coercion in IN() results in false comparison.
+
+  sql/item_cmpfunc.cc@1.208, 2006-05-30 00:35:04+04:00, evgen@moonbone.local +35 -2
+    Fixed bug#18360: Incorrect type coercion in IN() results in false comparison.
+    The agg_cmp_type() function now aggregates types of constant and non-constant
+    items separately. If some non-constant items will be found then their
+    aggregated type will be returned. Thus after the aggregation constants will
+    be coerced to the aggregated type.
+
+ChangeSet@1.2485, 2006-05-29 20:09:22+02:00, kent@mysql.com +1 -0
+  make_win_src_distribution.sh:
+    Convert to DOS EOL if dsp/dsw is in package
+
+  scripts/make_win_src_distribution.sh@1.37, 2006-05-29 20:08:36+02:00, kent@mysql.com +1 -0
+    Convert to DOS EOL if dsp/dsw is in package
+
+ChangeSet@1.2481.7.1, 2006-05-29 00:32:59+04:00, evgen@moonbone.local +3 -0
+  Fixed bug#19225: unchecked error results in server crash
+  
+  In multi-table delete a table for delete can't be used for selecting in
+  subselects. Appropriate error was raised but wasn't checked which leads to a
+  crash at the execution phase.
+  
+  The mysql_execute_command() now checks for errors before executing select
+  for multi-delete.
+
+  mysql-test/r/multi_update.result@1.44, 2006-05-29 00:30:55+04:00, evgen@moonbone.local +5 -0
+    Added test case for bug#19225: unchecked error results in server crash
+
+  mysql-test/t/multi_update.test@1.48, 2006-05-29 00:30:42+04:00, evgen@moonbone.local +8 -0
+    Added test case for bug#19225: unchecked error results in server crash
+
+  sql/sql_parse.cc@1.481, 2006-05-29 00:31:11+04:00, evgen@moonbone.local +2 -2
+    Fixed bug#19225: unchecked error results in server crash
+    The mysql_execute_command() now checks for errors before executing select for multi-delete.
+
+ChangeSet@1.2481.6.1, 2006-05-28 22:01:38+04:00, evgen@moonbone.local +3 -0
+  Fixed bug#15351: Wrong collation used for comparison of md5() and sha()
+  argument can lead to a wrong result.
+  
+  md5() and sha() functions treat their arguments as case sensitive strings.
+  But when they are compared their arguments were compared as a case
+  insensitive strings which leads to two functions with different arguments
+  and thus different results to being identical. This can lead to a wrong
+  decision made in the range optimizer and thus lead to a wrong result set.
+  
+  Item_func_md5::fix_length_and_dec() and Item_func_sha::fix_length_and_dec()
+  functions now set binary collation on their arguments.
+
+  mysql-test/r/func_str.result@1.100, 2006-05-28 21:58:49+04:00, evgen@moonbone.local +15 -0
+     Added test case for the bug#15351: Wrong collation used for comparison of md5() and sha()
+    argument can lead to a wrong result.
+
+  mysql-test/t/func_str.test@1.82, 2006-05-28 21:59:00+04:00, evgen@moonbone.local +12 -0
+    Added test case for the bug#15351: Wrong collation used for comparison of md5() and sha()
+    argument can lead to a wrong result.
+
+  sql/item_strfunc.cc@1.241.1.1, 2006-05-28 21:56:57+04:00, evgen@moonbone.local +18 -2
+    Fixed bug#15351: Wrong collation used for comparison of md5() and sha()
+    argument can lead to a wrong result.
+    Item_func_md5::fix_length_and_dec() and Item_func_sha::fix_length_and_dec()
+    functions now set binary collation on their arguments.
+
+ChangeSet@1.2481.5.1, 2006-05-28 19:47:01+03:00, aelkin@mysql.com +1 -0
+  BUG#14157: utf8 encoding in binlog without set character_set_client
+  
+  refining the test case to exclude problems with koi8r on some platforms.
+
+  mysql-test/t/mysqlbinlog.test@1.21, 2006-05-28 19:46:57+03:00, aelkin@mysql.com +2 -2
+    replacing unavailble on some platforms koi8r with latin1 still to preserve the essence of the testcase:
+    to generate utf8 names in binlog, despite client charset was different, and
+    to digest this binlog.
+
+ChangeSet@1.2481.4.1, 2006-05-27 23:57:33-07:00, igor@rurik.mysql.com +33 -0
+  Fixed bug #17873: confusing error message when IGNORE/USE/FORCE INDEX
+  refers to a column name.
+  Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  include/mysqld_error.h@1.108, 2006-05-27 23:57:26-07:00, igor@rurik.mysql.com +1 -0
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  include/sql_state.h@1.13, 2006-05-27 23:57:26-07:00, igor@rurik.mysql.com +1 -0
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  mysql-test/r/explain.result@1.16, 2006-05-27 23:57:26-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  mysql-test/r/key_cache.result@1.16, 2006-05-27 23:57:26-07:00, igor@rurik.mysql.com +1 -1
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  mysql-test/r/preload.result@1.8, 2006-05-27 23:57:26-07:00, igor@rurik.mysql.com +1 -1
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  mysql-test/r/select.result@1.72, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +12 -2
+    Added a test case for bug #17873.
+
+  mysql-test/t/explain.test@1.9, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  mysql-test/t/select.test@1.55, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +17 -2
+    Added a test case for bug #17873.
+
+  sql/share/czech/errmsg.txt@1.136, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/danish/errmsg.txt@1.132, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/dutch/errmsg.txt@1.136, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/english/errmsg.txt@1.150, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/estonian/errmsg.txt@1.134, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/french/errmsg.txt@1.135, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/german/errmsg.txt@1.130, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/greek/errmsg.txt@1.135, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/hungarian/errmsg.txt@1.135, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/italian/errmsg.txt@1.140, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/japanese-sjis/errmsg.txt@1.4, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/japanese/errmsg.txt@1.132, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/korean/errmsg.txt@1.134, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/norwegian-ny/errmsg.txt@1.134, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/norwegian/errmsg.txt@1.135, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/polish/errmsg.txt@1.134, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/portuguese/errmsg.txt@1.135, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/romanian/errmsg.txt@1.135, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/russian/errmsg.txt@1.130, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/serbian/errmsg.txt@1.82, 2006-05-27 23:57:27-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/slovak/errmsg.txt@1.135, 2006-05-27 23:57:28-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/spanish/errmsg.txt@1.136, 2006-05-27 23:57:28-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/swedish/errmsg.txt@1.136, 2006-05-27 23:57:28-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/share/ukrainian/errmsg.txt@1.96, 2006-05-27 23:57:28-07:00, igor@rurik.mysql.com +2 -2
+    Fixed bug #17873.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+  sql/sql_base.cc@1.270, 2006-05-27 23:57:28-07:00, igor@rurik.mysql.com +1 -1
+    Fixed bug #17873: confusing error message when IGNORE/USE/FORCE INDEX
+    refers to a column name.
+    Added a new error message ER_INDEX_DOES_NOT_EXIST.
+
+ChangeSet@1.2481.3.1, 2006-05-26 01:24:14+04:00, evgen@moonbone.local +3 -0
+  Fixed bug#16716: subselect in concat() may lead to a wrong result.
+  
+  The Item_func_concat::val_str() function tries to make as less re-allocations
+  as possible. This results in appending strings returned by 2nd and next
+  arguments to the string returned by 1st argument if the buffer for the first
+  argument has enough free space. A constant subselect is evaluated only once 
+  and its result is stored in an Item_cache_str. In the case when the first
+  argument of the concat() function is such a subselect Item_cache_str returns
+  the stored value and Item_func_concat::val_str() append values of other
+  arguments to it. But for the next row the value in the Item_cache_str isn't
+  restored because the subselect is a constant one and it isn't evaluated second
+  time. This results in appending string values of 2nd and next arguments to the 
+  result of the previous Item_func_concat::val_str() call.
+  
+  The Item_func_concat::val_str() function now checks whether the first argument 
+  is a constant one and if so it doesn't append values of 2nd and next arguments
+  to the string value returned by it.
+
+  mysql-test/r/func_concat.result@1.8, 2006-05-26 01:22:52+04:00, evgen@moonbone.local +7 -0
+    Added test case for bug#16716: subselect in concat() may lead to a wrong result.
+
+  mysql-test/t/func_concat.test@1.9, 2006-05-26 01:22:03+04:00, evgen@moonbone.local +7 -0
+    Added test case for bug#16716: subselect in concat() may lead to a wrong result.
+
+  sql/item_strfunc.cc@1.242, 2006-05-26 01:23:02+04:00, evgen@moonbone.local +4 -1
+    Fixed bug#16716: subselect in concat() may lead to a wrong result.
+    The Item_func_concat::val_str() function now checks whether the first argument 
+    is a constant one and if so it doesn't append values of 2nd and next arguments
+    to the string value returned by it.
+
+ChangeSet@1.2481.1.6, 2006-05-25 11:36:29-07:00, acurtis@xiphis.org +3 -0
+  updated libtool/autoconf files
+
+  config.guess@1.11, 2006-05-25 11:36:25-07:00, acurtis@xiphis.org +386 -307
+    updated libtool/autoconf files
+
+  config.sub@1.12, 2006-05-25 11:36:25-07:00, acurtis@xiphis.org +177 -51
+    updated libtool/autoconf files
+
+  ltmain.sh@1.16, 2006-05-25 11:36:25-07:00, acurtis@xiphis.org +1372 -698
+    updated libtool/autoconf files
+
+ChangeSet@1.2481.2.3, 2006-05-24 12:30:34+02:00, kent@mysql.com +1 -0
+  configure.in:
+    Update NDB version as well
+
+  configure.in@1.410, 2006-05-24 12:30:20+02:00, kent@mysql.com +1 -1
+    Update NDB version as well
+
+ChangeSet@1.2481.2.2, 2006-05-24 12:20:17+02:00, kent@mysql.com +1 -0
+  configure.in:
+    Stepped up to 4.1.22
+
+  configure.in@1.409, 2006-05-24 12:20:08+02:00, kent@mysql.com +1 -1
+    Stepped up to 4.1.22
+
+ChangeSet@1.2470.6.2, 2006-05-23 10:33:53+02:00, msvensson@neptunus.(none) +1 -0
+  Add comment for 'kill_server' function
+
+  sql/mysqld.cc@1.613, 2006-05-23 10:33:50+02:00, msvensson@neptunus.(none) +14 -1
+    Add comment for 'kill_server' function
+
+ChangeSet@1.2482, 2006-05-23 00:50:39+02:00, kent@mysql.com +1 -0
+  make_sharedlib_distribution.sh:
+    Solaris sh don't like {..} in file matching
+
+  scripts/make_sharedlib_distribution.sh@1.3, 2006-05-23 00:49:20+02:00, kent@mysql.com +4 -2
+    Solaris sh don't like {..} in file matching
+
+ChangeSet@1.1346.1.835, 2006-05-20 22:47:20+02:00, kent@mysql.com +1 -0
+  mysql.spec.sh:
+    Always compile position independent
+
+  support-files/mysql.spec.sh@1.61.1.35, 2006-05-20 22:46:00+02:00, kent@mysql.com +5 -0
+    Always compile position independent
+
+ChangeSet@1.2477.5.2, 2006-05-20 12:34:56+03:00, aelkin@mysql.com +1 -0
+  #14157: utf8 encoding in binlog without set character_set_client
+  
+  fixing an issue with the test portability.
+
+  mysql-test/t/mysqlbinlog.test@1.20, 2006-05-20 12:34:52+03:00, aelkin@mysql.com +5 -3
+    BUG#14157: utf8 encoding in binlog without set character_set_client
+    
+    fixing koi8r specific case to run on all platforms. client does not announce in cmd line any specific
+    encoding but rather set it via `set names'.
+
+ChangeSet@1.2477.6.1, 2006-05-19 16:21:32+05:00, ramil@mysql.com +3 -0
+  Fix for bug #18536: mysqldump does not maintain table orders as per --tables option
+
+  client/mysqldump.c@1.199, 2006-05-19 16:21:27+05:00, ramil@mysql.com +21 -33
+    Fix for bug #18536: mysqldump does not maintain table orders as per --tables option
+      - use list to store table names instead of hash.
+
+  mysql-test/r/mysqldump.result@1.52, 2006-05-19 16:21:27+05:00, ramil@mysql.com +35 -1
+    Fix for bug #18536: mysqldump does not maintain table orders as per --tables option
+      - test result.
+
+  mysql-test/t/mysqldump.test@1.43, 2006-05-19 16:21:27+05:00, ramil@mysql.com +12 -1
+    Fix for bug #18536: mysqldump does not maintain table orders as per --tables option
+      - test case.
+
+ChangeSet@1.2470.6.1, 2006-05-19 13:07:24+02:00, msvensson@neptunus.(none) +2 -0
+  Bug#15869  Cannot shutdown the server - it restarts
+   - A segfault occured when the function 'kill_server' called 
+     'my_sigset' with signal number 0. 'my_sigset' is a macro which
+     uses 'sigaction' to install the signal handler with an invalid
+     signal number will on most platforms return EINVAL but yields
+     a segfauilt on IRIX 6.5
+   - The server crash was detected by mysqld_safe and it was restarted although
+     a shutdown was requested. 
+   - Semantics of kill_server(0) is not known, leaving it intact
+
+  include/my_pthread.h@1.82, 2006-05-19 13:07:20+02:00, msvensson@neptunus.(none) +4 -2
+    Check return value from sigaction with a DBUG_ASSERT
+    Also DBUG_ASSERT if signal number 0 is passed
+
+  sql/mysqld.cc@1.612, 2006-05-19 13:07:20+02:00, msvensson@neptunus.(none) +2 -1
+    Don't call my_sigset if signo is 0 
+
+ChangeSet@1.2477.1.9, 2006-05-18 17:10:58+05:00, ramil@mysql.com +3 -0
+  Fix for bug #15558: truncate doesn't clear table on archive storage engine tables.
+
+  mysql-test/r/archive.result@1.5, 2006-05-18 17:10:52+05:00, ramil@mysql.com +2 -0
+    Fix for bug #15558: truncate doesn't clear table on archive storage engine tables.
+      - adjusted result
+
+  mysql-test/t/archive.test@1.7, 2006-05-18 17:10:53+05:00, ramil@mysql.com +2 -0
+    Fix for bug #15558: truncate doesn't clear table on archive storage engine tables.
+      - adjusted test
+
+  sql/examples/ha_archive.cc@1.30, 2006-05-18 17:10:53+05:00, ramil@mysql.com +1 -1
+    Fix for bug #15558: truncate doesn't clear table on archive storage engine tables.
+      - return an error as we don't suport delete_all_rows.
+
+ChangeSet@1.2472.1.5, 2006-05-17 00:22:43+02:00, tomas@poseidon.ndb.mysql.com +2 -0
+      ndb: added some missing error codes to mgmapi
+      ndb: ndb_waiter disconnect/reconnect on get status error
+
+  ndb/src/mgmapi/mgmapi.cpp@1.31, 2006-05-17 00:22:37+02:00, tomas@poseidon.ndb.mysql.com +3 -0
+    ndb: added some missing error codes to mgmapi
+
+  ndb/tools/waiter.cpp@1.22, 2006-05-17 00:22:37+02:00, tomas@poseidon.ndb.mysql.com +6 -0
+    ndb: ndb_waiter disconnect/reconnect on get status error
+
+ChangeSet@1.2477.2.1, 2006-05-16 16:50:05+03:00, aelkin@mysql.com +1 -0
+  BUG#14157: utf8 encoding in binlog without set character_set_client: e.g DROP temporary
+  
+  fixing encoding example because of table names can not be in koi8r 
+  on some platforms.
+
+  mysql-test/t/rpl_temporary.test@1.20, 2006-05-16 16:47:38+03:00, aelkin@mysql.com +1 -1
+    koi8r encoding to name tables is changed for latin1 for the former does not work
+    on some platforms.
+    The effect of the test remains: a test table is named to have multibyte utf8 representation,
+    which is the essence of the bug.
+
+ChangeSet@1.2472.1.4, 2006-05-16 11:47:33+02:00, tomas@poseidon.ndb.mysql.com +2 -0
+  Bug #18591 Repeated "show" and "all status" calls to ndb_mgm causes mgmd to crash
+  - not having lock can cause "block number list" to become corrupt => crash
+  - also may result in 2 threads receiving same block no => possble cause of
+  Bug #13987 Cluster: Loss of data nodes can cause high CPU usage from ndb_mgmd
+
+  ndb/src/mgmsrv/MgmtSrvr.cpp@1.74, 2006-05-16 11:47:26+02:00, tomas@poseidon.ndb.mysql.com +1 -0
+    ndb: added missing lock of mutex
+
+  ndb/src/ndbapi/SignalSender.cpp@1.5, 2006-05-16 11:47:26+02:00, tomas@poseidon.ndb.mysql.com +2 -0
+    Bug #18591 Repeated "show" and "all status" calls to ndb_mgm causes mgmd to crash
+    - not having lock can cause "block number list" to become corrupt => crash
+    - also may result in 2 threads receiving same block no => possble cause of
+    Bug #13987 Cluster: Loss of data nodes can cause high CPU usage from ndb_mgmd
+
+ChangeSet@1.2477.1.3, 2006-05-15 16:31:23+02:00, pekka@mysql.com +3 -0
+  ndb - bug#19537: arithmetic conversion Uint64 reg to Uint32 attr
+
+  ndb/src/kernel/blocks/dbtup/DbtupExecQuery.cpp@1.12, 2006-05-15 16:27:30+02:00, pekka@mysql.com +6 -0
+    bug#19537: write_attr: perform arithmetic conversion Uint64 to Uint32
+
+  ndb/test/ndbapi/Makefile.am@1.18, 2006-05-15 16:15:44+02:00, pekka@mysql.com +3 -0
+    enable testInterpreter
+
+  ndb/test/ndbapi/testInterpreter.cpp@1.4, 2006-05-15 16:19:56+02:00, pekka@mysql.com +162 -40
+    add test case Bug19537
+    the bug fix also fixed IncValue64 for whatever reason..
+
+ChangeSet@1.2472.1.2, 2006-05-15 17:16:21+02:00, tomas@poseidon.ndb.mysql.com +1 -0
+  Bug #16875 , correction of previous patch
+
+  mysql-test/r/ndb_autodiscover3.result@1.2, 2006-05-15 17:16:18+02:00, tomas@poseidon.ndb.mysql.com +37 -1
+    Bug #16875 , correction of previous patch
+
+ChangeSet@1.2472.1.1, 2006-05-15 16:23:59+02:00, tomas@poseidon.ndb.mysql.com +11 -0
+  Bug #16875 Using stale MySQLD FRM files can cause restored cluster to fail
+  - invalidate ndb dict cache on cluster disconnect (ClusterMgr.cpp)
+  - add check for correct frm on external lock when table cache is found invalid
+
+  mysql-test/r/ndb_autodiscover3.result@1.1, 2006-05-15 16:23:54+02:00, tomas@poseidon.ndb.mysql.com +9 -0
+    Bug #16875 Using stale MySQLD FRM files can cause restored cluster to fail
+
+  mysql-test/r/ndb_autodiscover3.result@1.0, 2006-05-15 16:23:54+02:00, tomas@poseidon.ndb.mysql.com +0 -0
+    BitKeeper file /home/tomas/mysql-4.1/mysql-test/r/ndb_autodiscover3.result
+
+  mysql-test/t/ndb_autodiscover3.test@1.1, 2006-05-15 16:23:55+02:00, tomas@poseidon.ndb.mysql.com +65 -0
+    Bug #16875 Using stale MySQLD FRM files can cause restored cluster to fail
+
+  mysql-test/t/ndb_autodiscover3.test@1.0, 2006-05-15 16:23:55+02:00, tomas@poseidon.ndb.mysql.com +0 -0
+    BitKeeper file /home/tomas/mysql-4.1/mysql-test/t/ndb_autodiscover3.test
+
+  ndb/include/ndbapi/ndb_cluster_connection.hpp@1.9, 2006-05-15 16:23:54+02:00, tomas@poseidon.ndb.mysql.com +1 -0
+    Bug #16875 Using stale MySQLD FRM files can cause restored cluster to fail
+
+  ndb/src/ndbapi/ClusterMgr.cpp@1.17, 2006-05-15 16:23:54+02:00, tomas@poseidon.ndb.mysql.com +5 -0
+    Bug #16875 Using stale MySQLD FRM files can cause restored cluster to fail
+
+  ndb/src/ndbapi/ClusterMgr.hpp@1.6, 2006-05-15 16:23:54+02:00, tomas@poseidon.ndb.mysql.com +1 -0
+    Bug #16875 Using stale MySQLD FRM files can cause restored cluster to fail
+
+  ndb/src/ndbapi/DictCache.cpp@1.14, 2006-05-15 16:23:54+02:00, tomas@poseidon.ndb.mysql.com +36 -0
+    Bug #16875 Using stale MySQLD FRM files can cause restored cluster to fail
+
+  ndb/src/ndbapi/DictCache.hpp@1.9, 2006-05-15 16:23:54+02:00, tomas@poseidon.ndb.mysql.com +3 -0
+    Bug #16875 Using stale MySQLD FRM files can cause restored cluster to fail
+
+  ndb/src/ndbapi/TransporterFacade.hpp@1.22, 2006-05-15 16:23:54+02:00, tomas@poseidon.ndb.mysql.com +6 -0
+    Bug #16875 Using stale MySQLD FRM files can cause restored cluster to fail
+
+  ndb/src/ndbapi/ndb_cluster_connection.cpp@1.21, 2006-05-15 16:23:54+02:00, tomas@poseidon.ndb.mysql.com +6 -0
+    Bug #16875 Using stale MySQLD FRM files can cause restored cluster to fail
+
+  ndb/src/ndbapi/ndb_cluster_connection_impl.hpp@1.2, 2006-05-15 16:23:54+02:00, tomas@poseidon.ndb.mysql.com +1 -0
+    Bug #16875 Using stale MySQLD FRM files can cause restored cluster to fail
+
+  sql/ha_ndbcluster.cc@1.179.1.1, 2006-05-15 16:23:54+02:00, tomas@poseidon.ndb.mysql.com +16 -1
+    Bug #16875 Using stale MySQLD FRM files can cause restored cluster to fail
+
+ChangeSet@1.2470.5.1, 2006-05-15 17:25:37+04:00, aivanov@mysql.com +2 -0
+  Applied innodb-4.1-ss29 snapshot.
+   Fix BUG#19542 "InnoDB doesn't increase the Handler_read_prev counter.
+   
+
+  innobase/os/os0file.c@1.105, 2006-05-15 17:25:33+04:00, aivanov@mysql.com +38 -25
+    Applied innodb-4.1-ss29 snapshot.
+     Check the page trailers also after writing to disk.
+     This improves the chances of diagnosing Bug 18886.
+     os_file_check_page_trailers(): New function for checking
+     that two copies of the LSN stamped on the pages match.
+     os_aio_simulated_handle(): Call os_file_check_page_trailers()
+     before and after os_file_write().
+
+  sql/ha_innodb.cc@1.215, 2006-05-15 17:25:33+04:00, aivanov@mysql.com +2 -0
+    Applied innodb-4.1-ss29 snapshot.
+     Increment statistic counter in ha_innobase::index_prev().
+
+ChangeSet@1.2477.1.1, 2006-05-14 20:09:09+03:00, aelkin@mysql.com +2 -0
+  BUG#14157: utf8 encoding in binlog without set character_set_client
+  
+  fixing names length. Got an issue when merged to 5.0, decided to fix starting from 4.1
+
+  mysql-test/t/mysqlbinlog.test@1.19, 2006-05-14 20:09:05+03:00, aelkin@mysql.com +1 -1
+    fixing temp table name to fit to 64 bytes for 5.0
+
+  mysql-test/t/rpl_temporary.test@1.19, 2006-05-14 20:09:05+03:00, aelkin@mysql.com +1 -1
+    fixing temp table name to fit to 64 bytes for 5.0
+
+ChangeSet@1.2479, 2006-05-14 21:49:33+05:00, holyfoot@deer.(none) +1 -0
+  bug 15430 (init_connect test fails with the embedded server)
+  mysqltest program should be really multithreaded to perform this
+  test with the embedded server. So this test disabled until we
+  redo mysqltest this way
+
+  mysql-test/t/init_connect.test@1.5, 2006-05-14 21:49:29+05:00, holyfoot@mysql.com +2 -0
+    test can't work properly with the embedded server yet
+
+ChangeSet@1.2478, 2006-05-14 21:43:22+05:00, holyfoot@deer.(none) +1 -0
+  bug #15435 (wait_timeout.test fails with the embedded server)
+  this test just can't work in the embedded server
+
+  mysql-test/t/wait_timeout.test@1.2, 2006-05-14 21:42:33+05:00, holyfoot@mysql.com +3 -0
+    test can't work properly with the embedded server yet
+
+ChangeSet@1.2477, 2006-05-13 12:14:20+03:00, aelkin@mysql.com +2 -0
+  BUG#14157: utf8 encoding in binlog without set character_set_client
+  fixing a path to find charset by $MYSQL client. I believe the fix is done what should be
+  by default. 
+
+  mysql-test/t/mysqlbinlog.test@1.18, 2006-05-13 12:14:17+03:00, aelkin@mysql.com +1 -1
+    --character-sets-dir=../sql/share/charsets  is added otherwise client/.libs/lt-mysql
+    searches in /usr/local/mysql ... A bug? 
+
+  mysql-test/t/rpl_temporary.test@1.18, 2006-05-13 12:14:17+03:00, aelkin@mysql.com +1 -1
+    --character-sets-dir=../sql/share/charsets/
+
+ChangeSet@1.2470.4.1, 2006-05-12 21:29:06+03:00, aelkin@mysql.com +4 -0
+  BUG#19188: incorrect temporary table name of DROP query in replication
+  
+    A pattern to generate binlog for DROPped temp table in close_temporary_tables
+    was buggy: could not deal with a grave-accent-in-name table.
+  
+    The fix exploits `append_identifier()' for quoting and duplicating accents.
+
+  mysql-test/r/rpl_temporary.result@1.13.1.1, 2006-05-12 21:29:00+03:00, aelkin@mysql.com +8 -5
+    results changed
+
+  mysql-test/t/rpl_temporary.test@1.15.1.1, 2006-05-12 21:29:00+03:00, aelkin@mysql.com +10 -5
+    more correct internal table emulation; typo of @@session in bug#17263.
+
+  sql/mysql_priv.h@1.375.1.1, 2006-05-12 21:29:01+03:00, aelkin@mysql.com +12 -0
+    bool is_user_table(TABLE * table) 
+    is added to answer wheather temporary table was created explicitly.
+
+  sql/sql_base.cc@1.267.1.1, 2006-05-12 21:29:01+03:00, aelkin@mysql.com +69 -78
+    Utilizing `append_identifier' to quote. `close_temporary_tables' once again recoded
+    I hope to become much simplier than previously. No-binlog branch is separated completely the
+    rest that adopts String's methods.
+
+ChangeSet@1.2474, 2006-05-12 18:28:48+02:00, kent@mysql.com +52 -0
+  Many files:
+    Change mode to -rw-rw-r--
+  Ereport.pl, Ecreate.pl, Ecompare.pl:
+    Change mode to -rwxrwxr--
+
+  bdb/dist/s_dir@1.2, 2006-05-12 18:26:38+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  myisam/ftbench/Ecompare.pl@1.3, 2006-05-12 18:26:38+02:00, kent@mysql.com +0 -0
+    Change mode to -rwxrwxr--
+
+  myisam/ftbench/Ecreate.pl@1.2, 2006-05-12 18:26:38+02:00, kent@mysql.com +0 -0
+    Change mode to -rwxrwxr--
+
+  myisam/ftbench/Ereport.pl@1.4, 2006-05-12 18:26:38+02:00, kent@mysql.com +0 -0
+    Change mode to -rwxrwxr--
+
+  myisam/ftbench/README@1.3, 2006-05-12 18:26:39+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  myisammrg/myrg_rnext_same.c@1.5, 2006-05-12 18:26:39+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/include/rpl_stmt_seq.inc@1.4, 2006-05-12 18:26:39+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/misc/kill_master.sh@1.3, 2006-05-12 18:26:39+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/blackhole.result@1.4, 2006-05-12 18:26:39+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/ctype_cp1250_ch.result@1.4, 2006-05-12 18:26:40+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/ctype_cp932_binlog.result@1.2, 2006-05-12 18:26:40+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/ctype_euckr.result@1.2, 2006-05-12 18:26:40+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/ctype_gb2312.result@1.2, 2006-05-12 18:26:40+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/ctype_ucs_binlog.result@1.2, 2006-05-12 18:26:41+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/fulltext2.result@1.12, 2006-05-12 18:26:41+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/func_des_encrypt.result@1.2, 2006-05-12 18:26:41+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/grant2.result@1.15, 2006-05-12 18:26:41+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/insert_update.result@1.16, 2006-05-12 18:26:41+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/ndb_database.result@1.2, 2006-05-12 18:26:42+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/ndb_update.result@1.4, 2006-05-12 18:26:42+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/not_embedded_server.result@1.2, 2006-05-12 18:26:42+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/query_cache_notembedded.result@1.3, 2006-05-12 18:26:43+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/rpl_create_database.result@1.3, 2006-05-12 18:26:43+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/rpl_drop_db.result@1.5, 2006-05-12 18:26:43+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/rpl_dual_pos_advance.result@1.2, 2006-05-12 18:26:43+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/rpl_insert_select.result@1.2, 2006-05-12 18:26:43+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/rpl_multi_update3.result@1.5, 2006-05-12 18:26:44+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/rpl_multi_update4.result@1.2, 2006-05-12 18:26:44+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/rpl_slave_status.result@1.5, 2006-05-12 18:26:44+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/rpl_trunc_temp.result@1.2, 2006-05-12 18:26:44+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/timezone_grant.result@1.3, 2006-05-12 18:26:45+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/std_data/master-bin.000001@1.2, 2006-05-12 18:26:45+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/ctype_latin1.test@1.9, 2006-05-12 18:26:45+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/fulltext2.test@1.14, 2006-05-12 18:26:46+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/gis-rtree.test@1.12, 2006-05-12 18:26:46+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/grant2.test@1.16, 2006-05-12 18:26:46+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/insert_update.test@1.17, 2006-05-12 18:26:46+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/mysqltest.test@1.20, 2006-05-12 18:26:47+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/rpl_ddl.test@1.5, 2006-05-12 18:26:47+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/rpl_insert_ignore.test@1.3, 2006-05-12 18:26:47+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/rpl_multi_query.test@1.4, 2006-05-12 18:26:47+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/rpl_rewrite_db-slave.opt@1.3, 2006-05-12 18:26:47+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/rpl_rewrite_db.test@1.5, 2006-05-12 18:26:48+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/subselect2.test@1.6, 2006-05-12 18:26:48+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/union-master.opt@1.3, 2006-05-12 18:26:48+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysys/mf_tempdir.c@1.4, 2006-05-12 18:26:48+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysys/my_crc32.c@1.3, 2006-05-12 18:26:48+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysys/my_gethwaddr.c@1.3, 2006-05-12 18:26:48+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysys/my_getsystime.c@1.5, 2006-05-12 18:26:49+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  scripts/mysql_prepare_privilege_tables_for_5.sql@1.2, 2006-05-12 18:26:49+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  sql/sql_bitmap.h@1.8, 2006-05-12 18:26:49+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  zlib/Makefile.am@1.6, 2006-05-12 18:26:49+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+ChangeSet@1.1346.1.834, 2006-05-12 17:51:37+02:00, kent@mysql.com +19 -0
+  Many files:
+    Change mode to -rw-rw-r--
+  dbug_add_tags.pl:
+    Change mode to -rwxrwxr--
+
+  mysql-test/std_data/master-bin.001@1.2.1.1, 2006-05-12 17:50:46+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  dbug/dbug_add_tags.pl@1.3, 2006-05-12 17:50:45+02:00, kent@mysql.com +0 -0
+    Change mode to -rwxrwxr--
+
+  myisammrg/myrg_range.c@1.2.1.1, 2006-05-12 17:50:46+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/innodb_handler.result@1.2.1.5, 2006-05-12 17:50:46+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/r/repair.result@1.4.1.1, 2006-05-12 17:50:46+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/std_data/trunc_binlog.001@1.1.1.1, 2006-05-12 17:50:47+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/bulk_replace.test@1.2.1.1, 2006-05-12 17:50:47+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/create_select_tmp.test@1.1.1.2, 2006-05-12 17:50:47+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/ctype_tis620.test@1.2.1.2, 2006-05-12 17:50:47+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/handler.test@1.7.1.11, 2006-05-12 17:50:47+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/innodb_handler.test@1.2.1.6, 2006-05-12 17:50:47+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/mix_innodb_myisam_binlog-master.opt@1.3, 2006-05-12 17:50:47+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/repair.test@1.1.1.5, 2006-05-12 17:50:48+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/rpl_commit_after_flush.test@1.1.1.2, 2006-05-12 17:50:48+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/rpl_free_items-slave.opt@1.3, 2006-05-12 17:50:48+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  mysql-test/t/rpl_free_items.test@1.1.1.2, 2006-05-12 17:50:48+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  scripts/mysql_secure_installation.sh@1.3, 2006-05-12 17:50:48+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  sql/sql_handler.cc@1.19.1.30, 2006-05-12 17:50:49+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+  support-files/mysql-multi.server.sh@1.4, 2006-05-12 17:50:49+02:00, kent@mysql.com +0 -0
+    Change mode to -rw-rw-r--
+
+ChangeSet@1.2461.25.1, 2006-05-12 11:18:06+02:00, msvensson@neptunus.(none) +1 -0
+  Bug#18818 configure: No longer finds OpenSSL on Mac OS X
+   - Remove usage of $shrext_cmds variable
+   - Test for libs using all known library file endings
+
+  acinclude.m4@1.142, 2006-05-12 11:18:02+02:00, msvensson@neptunus.(none) +11 -9
+    Remove the usage of $shrext_cmds. instead test for all the library file
+    endings we currently know, that is .a .so .sl and .dylib
+
+ChangeSet@1.1346.1.833, 2006-05-11 19:48:57+02:00, kent@mysql.com +1 -0
+  configure.in:
+    Stepped up to 4.0.28
+
+  configure.in@1.191.1.144, 2006-05-11 19:48:23+02:00, kent@mysql.com +1 -1
+    Stepped up to 4.0.28
+
+ChangeSet@1.2461.3.2, 2006-05-11 14:13:14+02:00, msvensson@neptunus.(none) +6 -0
+  Bug#15328 Segmentation fault occured if my.cnf is invalid for escape sequence
+   - Check that length of value is longer than 1 before decrementing length by 2.
+   - Backport from 5.0, make it possible to use my_print_defaults in tests
+
+  mysql-test/mysql-test-run.pl@1.62.1.3, 2006-05-11 14:13:10+02:00, msvensson@neptunus.(none) +8 -0
+    Backport from 5.0, make it possible to use my_print_defaults from tests
+
+  mysql-test/mysql-test-run.sh@1.264.1.1, 2006-05-11 14:13:10+02:00, msvensson@neptunus.(none) +3 -1
+    Backport from 5.0, make it possible to use my_print_defaults from tests
+
+  mysql-test/r/mysqldump.result@1.50.1.1, 2006-05-11 14:13:10+02:00, msvensson@neptunus.(none) +1 -0
+    Update result
+
+  mysql-test/std_data/bug15328.cnf@1.1, 2006-05-11 14:13:11+02:00, msvensson@neptunus.(none) +2 -0
+    New BitKeeper file ``mysql-test/std_data/bug15328.cnf''
+
+  mysql-test/std_data/bug15328.cnf@1.0, 2006-05-11 14:13:11+02:00, msvensson@neptunus.(none) +0 -0
+    BitKeeper file /home/msvensson/mysql/bug15328/my41-bug15328/mysql-test/std_data/bug15328.cnf
+
+  mysql-test/t/mysqldump.test@1.41.1.1, 2006-05-11 14:13:10+02:00, msvensson@neptunus.(none) +8 -0
+    Test that my_print default don't segfault when encountering an option without closing "
+
+  mysys/default.c@1.50, 2006-05-11 14:13:10+02:00, msvensson@neptunus.(none) +3 -1
+    Check that length of value is longer than 1 before deciding to decrement its length by 2.
+
+ChangeSet@1.2470.2.3, 2006-05-10 21:53:01+02:00, kent@mysql.com +1 -0
+  mysql.spec.sh:
+    Compile in all character sets in Max (bug#14918)
+
+  support-files/mysql.spec.sh@1.114.1.3, 2006-05-10 21:51:21+02:00, kent@mysql.com +8 -1
+    Compile in all character sets in Max (bug#14918)
+
+ChangeSet@1.2461.24.1, 2006-05-09 23:01:31+03:00, aelkin@mysql.com +8 -0
+  BUG#14157: utf8 encoding in binlog without set character_set_client e.g DROP temporary
+  
+  Binlog lacks encoding info about DROPped temporary table.
+  
+  Idea of the fix is to switch temporary to system_charset_info when a temporary table
+  is DROPped for binlog. Since that is the server, that automatically, but not the client, who generates the query
+  the binlog should be updated on the server's encoding for the coming DROP.
+  The `write_binlog_with_system_charset()' is introduced to replace similar problematic places in the code.
+
+  mysql-test/r/drop_temp_table.result@1.11, 2006-05-09 23:01:27+03:00, aelkin@mysql.com +1 -0
+    results changed
+
+  mysql-test/r/mix_innodb_myisam_binlog.result@1.13, 2006-05-09 23:01:27+03:00, aelkin@mysql.com +3 -2
+    results changed
+
+  mysql-test/r/mysqlbinlog.result@1.11, 2006-05-09 23:01:27+03:00, aelkin@mysql.com +6 -1
+    results changed
+
+  mysql-test/r/rpl_temporary.result@1.14, 2006-05-09 23:01:27+03:00, aelkin@mysql.com +4 -0
+    results changed
+
+  mysql-test/t/mysqlbinlog.test@1.17, 2006-05-09 23:01:27+03:00, aelkin@mysql.com +10 -1
+    Check roll-forward recovery from binlog where there are DROP temporary tables created
+    in koi8r.
+
+  mysql-test/t/rpl_temporary.test@1.16, 2006-05-09 23:01:27+03:00, aelkin@mysql.com +12 -0
+    Check slave digests binlog with DROP temporary tables created in koi8r.
+
+  sql/mysql_priv.h@1.376, 2006-05-09 23:01:28+03:00, aelkin@mysql.com +7 -0
+    `write_binlog_with_system_charset()' is added to be called when a binlog event
+    is created "implicitly" like DROP temporary table is case of closing connection.
+
+  sql/sql_base.cc@1.268, 2006-05-09 23:01:28+03:00, aelkin@mysql.com +1 -1
+    Idea of the fix is to switch temporary to system_charset_info when a temporary table
+    is DROPped for binlog. Since that is the server, not the client, who generates the query
+    the binlog should be updated on server's encoding for the coming DROP.
+
+ChangeSet@1.2470.2.1, 2006-05-09 11:55:41+02:00, mskold@mysql.com +1 -0
+  bug #19623  UniqueHashIndexes resource leak: allocate array pool based on MaxNoOfTables
+
+  ndb/src/kernel/blocks/dbtc/DbtcInit.cpp@1.10, 2006-05-09 11:54:46+02:00, mskold@mysql.com +1 -1
+    bug #19623  UniqueHashIndexes resource leak: allocate array pool based on MaxNoOfTables
+
+ChangeSet@1.2471, 2006-05-08 04:37:58+02:00, tnurnberg@mysql.com +5 -0
+  Bug#10418: LOAD_FILE does not behave like in manual if file does not exist
+  
+  load_file() string-function should return NULL rather than throw an error if
+  the file doesn't exist, as per the manual.
+
+  mysql-test/r/func_str.result@1.99, 2006-05-08 03:38:08+02:00, tnurnberg@mysql.com +7 -0
+    expect NULL rather than error if file given to load_file() doesn't exist
+
+  mysql-test/r/outfile.result@1.4, 2006-05-08 03:38:00+02:00, tnurnberg@mysql.com +11 -11
+    expect NULL rather than error if file given to load_file() doesn't exist
+
+  mysql-test/t/func_str.test@1.81, 2006-05-08 03:37:13+02:00, tnurnberg@mysql.com +8 -1
+    show that load_file() will return NULL rather than throw an error
+    if file doesn't exist
+
+  mysql-test/t/outfile.test@1.12, 2006-05-08 03:36:18+02:00, tnurnberg@mysql.com +0 -1
+    expect NULL rather than error if file given to load_file() doesn't exist
+
+  sql/item_strfunc.cc@1.241, 2006-05-08 03:39:19+02:00, tnurnberg@mysql.com +1 -1
+    load_file() should return NULL as per the docs if file not found,
+    rather than throw an error
+
+ChangeSet@1.2469, 2006-05-06 23:48:13-07:00, igor@rurik.mysql.com +6 -0
+  Fixed bug #14927.
+  A query with a group by and having clauses could return a wrong
+  result set if the having condition contained a constant conjunct 
+  evaluated to FALSE.
+  It happened because the pushdown condition for table with
+  grouping columns lost its constant conjuncts.
+  Pushdown conditions are always built by the function make_cond_for_table
+  that ignores constant conjuncts. This is apparently not correct when
+  constant false conjuncts are present.
+  
+
+  mysql-test/r/having.result@1.15, 2006-05-06 23:48:09-07:00, igor@rurik.mysql.com +17 -0
+    Added a test case for bug #14927.
+
+  mysql-test/t/having.test@1.14, 2006-05-06 23:48:09-07:00, igor@rurik.mysql.com +16 -0
+    Added a test case for bug #14927.
+
+  sql/sql_lex.cc@1.152, 2006-05-06 23:48:09-07:00, igor@rurik.mysql.com +2 -0
+    Fixed bug #14927.
+    Initialized fields for having conditions in  st_select_lex::init_query().
+
+  sql/sql_lex.h@1.189, 2006-05-06 23:48:09-07:00, igor@rurik.mysql.com +1 -0
+    Fixed bug #14927.
+    Added a field to restore having condititions for execution in SP and PS.
+    
+
+  sql/sql_prepare.cc@1.157, 2006-05-06 23:48:09-07:00, igor@rurik.mysql.com +8 -2
+    Fixed bug #14927.
+    Added code to restore havinf conditions for execution in SP and PS.
+    
+
+  sql/sql_select.cc@1.454, 2006-05-06 23:48:09-07:00, igor@rurik.mysql.com +19 -9
+    Fixed bug #14927.
+    Performed evaluation of constant expressions in having clauses.
+    If the having condition contains a constant conjunct that is always false
+    an empty result set is returned after the optimization phase.
+    In this case the corresponding EXPLAIN command now returns 
+    "Impossible HAVING" in the last column.
+    
+
+ChangeSet@1.2465.1.1, 2006-05-06 18:24:41+04:00, kroki@mysql.com +2 -0
+  Fix race condition in the test for bug#16501.
+
+  mysql-test/r/func_misc.result@1.19, 2006-05-06 18:24:37+04:00, kroki@mysql.com +2 -2
+    Update the result.
+
+  mysql-test/t/func_misc.test@1.15, 2006-05-06 18:24:37+04:00, kroki@mysql.com +3 -1
+    Fix race condition in the test for bug#16501.
+
+ChangeSet@1.2461.23.1, 2006-05-06 13:15:00+04:00, sergefp@mysql.com +3 -0
+  BUG#16798: Inapplicable ref_or_null query plan and bad query result on random occasions 
+  The bug was as follows: When merge_key_fields() encounters "t.key=X OR t.key=Y" it will 
+  try to join them into ref_or_null access via "t.key=X OR NULL". In order to make this 
+  inference it checks if Y<=>NULL, ignoring the fact that value of Y may be not yet known.
+  
+  The fix is that the check if Y<=>NULL is made only if value of Y is known (i.e. it is a
+  constant).
+  TODO: When merging to 5.0, replace used_tables() with const_item() everywhere in merge_key_fields().
+
+  mysql-test/r/innodb_mysql.result@1.3, 2006-05-06 13:14:49+04:00, sergefp@mysql.com +56 -1
+    Testcase for BUG16798
+
+  mysql-test/t/innodb_mysql.test@1.3, 2006-05-06 13:14:50+04:00, sergefp@mysql.com +55 -1
+    Testcase for BUG16798
+
+  sql/sql_select.cc@1.453, 2006-05-06 13:14:50+04:00, sergefp@mysql.com +2 -1
+    BUG#16798: Inapplicable ref_or_null query plan and bad query result on random occasions 
+    In merge_key_fields() don't call val->is_null() if the value of val is not known.
+
+ChangeSet@1.2461.22.1, 2006-05-05 17:18:47+02:00, mskold@mysql.com +7 -0
+  Bug#16997  Table rename that changes database does not rename indexes, recreate indexes in new database
+
+  mysql-test/r/ndb_rename.result@1.1, 2006-05-05 17:15:34+02:00, mskold@mysql.com +14 -0
+
+  mysql-test/r/ndb_rename.result@1.0, 2006-05-05 17:15:34+02:00, mskold@mysql.com +0 -0
+    BitKeeper file /home/marty/MySQL/mysql-4.1/mysql-test/r/ndb_rename.result
+
+  mysql-test/t/ndb_rename.test@1.1, 2006-05-05 17:15:34+02:00, mskold@mysql.com +32 -0
+
+  mysql-test/t/ndb_rename.test@1.0, 2006-05-05 17:15:34+02:00, mskold@mysql.com +0 -0
+    BitKeeper file /home/marty/MySQL/mysql-4.1/mysql-test/t/ndb_rename.test
+
+  ndb/include/ndbapi/NdbDictionary.hpp@1.23, 2006-05-05 17:18:37+02:00, mskold@mysql.com +20 -3
+    Bug#16997  Table rename that changes database does not rename indexes, recreate indexes in new database
+
+  ndb/src/ndbapi/NdbDictionary.cpp@1.23, 2006-05-05 17:18:37+02:00, mskold@mysql.com +16 -0
+    Bug#16997  Table rename that changes database does not rename indexes, recreate indexes in new database
+
+  ndb/src/ndbapi/NdbDictionaryImpl.cpp@1.55, 2006-05-05 17:18:37+02:00, mskold@mysql.com +5 -22
+    Bug#16997  Table rename that changes database does not rename indexes, recreate indexes in new database
+
+  ndb/src/ndbapi/NdbDictionaryImpl.hpp@1.22, 2006-05-05 17:18:37+02:00, mskold@mysql.com +16 -6
+    Bug#16997  Table rename that changes database does not rename indexes, recreate indexes in new database
+
+  sql/ha_ndbcluster.cc@1.180, 2006-05-05 17:18:37+02:00, mskold@mysql.com +40 -1
+    Bug#16997  Table rename that changes database does not rename indexes, recreate indexes in new database
+
+ChangeSet@1.2461.20.4, 2006-05-05 11:21:21+03:00, aelkin@mysql.com +3 -0
+  Bug#19136: Crashing log-bin and uninitialized user variables in a derived table
+  
+  The reason of the bug is in that `get_var_with_binlog' performs missed
+  assingment of
+  the variables as side-effect. Doing that it eventually calls
+  `free_underlaid_joins' to pass as an argument `thd->lex->select_lex' of the lex
+  which belongs to the user query, not 
+  to one which is emulated i.e SET @var1:=NULL.
+  
+  
+  `get_var_with_binlog' is refined to supply a temporary lex to sql_set_variables's stack.
+
+  mysql-test/r/rpl_user_variables.result@1.11, 2006-05-05 11:21:17+03:00, aelkin@mysql.com +1 -0
+    results changed
+
+  mysql-test/t/rpl_user_variables.test@1.8, 2006-05-05 11:21:17+03:00, aelkin@mysql.com +6 -0
+    a problematic query to be binlogged is added
+
+  sql/item_func.cc@1.259.1.1, 2006-05-05 11:21:18+03:00, aelkin@mysql.com +10 -0
+    BUG#19136: Crashing log-bin and uninitialized user variables
+    
+    The reason of the bug is in that how `get_var_with_binlog' performs missed
+    assingment of the variables: `free_underlaid_joins' gets as an argument `thd->lex->select_lex'
+    which belongs to the user query, not to one which is emulated i.e SET @var1:=NULL.
+    
+    `get_var_with_binlog' is refined to supply a temporary lex to sql_set_variables's stack.
+    
+
+ChangeSet@1.2461.12.9, 2006-05-04 16:16:18-05:00, paul@polar.kitebird.com +1 -0
+  .del-changelog-4.1.xml~8aa496ebed09d868:
+    Delete: Docs/changelog-4.1.xml
+
+  BitKeeper/deleted/.del-changelog-4.1.xml~8aa496ebed09d868@1.2, 2006-05-04 16:16:10-05:00, paul@polar.kitebird.com +0 -0
+    Delete: Docs/changelog-4.1.xml
+
+ChangeSet@1.1346.1.831, 2006-05-04 16:14:19-05:00, paul@polar.kitebird.com +1 -0
+  .del-changelog-4.0.xml~8f56ee8a913e848b:
+    Delete: Docs/changelog-4.0.xml
+
+  BitKeeper/deleted/.del-changelog-4.0.xml~8f56ee8a913e848b@1.3, 2006-05-04 16:14:05-05:00, paul@polar.kitebird.com +0 -0
+    Delete: Docs/changelog-4.0.xml
+
+ChangeSet@1.2461.21.2, 2006-05-04 20:19:37+03:00, jani@ua141d10.elisa.omakaista.fi +3 -0
+  Fixed Bug#11324:
+  TIME_FORMAT using "%l:%i" returns 36:00 with 24:00:00 in TIME column
+
+  mysql-test/r/date_formats.result@1.20, 2006-05-04 20:19:33+03:00, jani@ua141d10.elisa.omakaista.fi +18 -0
+    Added test case for Bug#11324,
+    "TIME_FORMAT using "%l:%i" returns 36:00 with 24:00:00 in TIME column"
+
+  mysql-test/t/date_formats.test@1.17, 2006-05-04 20:19:33+03:00, jani@ua141d10.elisa.omakaista.fi +11 -0
+    Added test case for Bug#11324,
+    "TIME_FORMAT using "%l:%i" returns 36:00 with 24:00:00 in TIME column"
+
+  sql/item_timefunc.cc@1.98.2.2, 2006-05-04 20:19:33+03:00, jani@ua141d10.elisa.omakaista.fi +1 -1
+    Fixed Bug#11324:
+    TIME_FORMAT using "%l:%i" returns 36:00 with 24:00:00 in TIME column
+
+ChangeSet@1.2461.21.1, 2006-05-04 19:31:10+03:00, jani@ua141d10.elisa.omakaista.fi +3 -0
+  Fix for Bug#11326.
+
+  mysql-test/r/date_formats.result@1.19, 2006-05-04 19:31:06+03:00, jani@ua141d10.elisa.omakaista.fi +18 -0
+    Added test cases for Bug#11326
+
+  mysql-test/t/date_formats.test@1.16, 2006-05-04 19:31:06+03:00, jani@ua141d10.elisa.omakaista.fi +11 -0
+    Added test cases for Bug#11326
+
+  sql/item_timefunc.cc@1.98.2.1, 2006-05-04 19:31:06+03:00, jani@ua141d10.elisa.omakaista.fi +2 -1
+    Fix for Bug#11326.
+
+ChangeSet@1.2461.18.1, 2006-05-04 15:34:20+05:00, ramil@mysql.com +1 -0
+  Fix for bug #18351: mysqlbinlog does not set default charset?
+  
+
+  client/mysqlbinlog.cc@1.108, 2006-05-04 15:34:13+05:00, ramil@mysql.com +17 -0
+    Fix for bug #18351: mysqlbinlog does not set default charset?
+      - --set-charset option added to allow one deal with old binlog files.
+        It adds 'SET NAMES charset' to the output.
+
+ChangeSet@1.2461.17.1, 2006-05-04 11:55:09+05:00, bar@mysql.com +5 -0
+  Bugs#17647: Trouble with "create database"
+  
+  Problem:
+  if a user was granted privileges on database "d1",
+  it also was able to act on "D1" (i.e. in upper case),
+  even on Unix with case sensitive file system.
+  
+  Fix:
+  Initialize grant hash to use binary comparison
+  if lower_case_file_system is not set (on most unixes),
+  and case insensitive comparison otherwise (Windows, MacOSX).
+
+  mysql-test/include/have_case_sensitive_file_system.inc@1.1, 2006-05-04 11:55:03+05:00, bar@mysql.com +4 -0
+    New BitKeeper file ``mysql-test/include/have_case_sensitive_file_system.inc''
+    Backporting from 5.1
+    
+
+  mysql-test/include/have_case_sensitive_file_system.inc@1.0, 2006-05-04 11:55:03+05:00, bar@mysql.com +0 -0
+    BitKeeper file /usr/home/bar/mysql-4.1.b17647/mysql-test/include/have_case_sensitive_file_system.inc
+
+  mysql-test/r/case_sensitive_file_system.require@1.1, 2006-05-04 11:55:03+05:00, bar@mysql.com +2 -0
+    New BitKeeper file ``mysql-test/r/case_sensitive_file_system.require''
+    Backporting from 5.1
+    
+
+  mysql-test/r/case_sensitive_file_system.require@1.0, 2006-05-04 11:55:03+05:00, bar@mysql.com +0 -0
+    BitKeeper file /usr/home/bar/mysql-4.1.b17647/mysql-test/r/case_sensitive_file_system.require
+
+  mysql-test/r/lowercase_fs_off.result@1.1, 2006-05-04 11:55:03+05:00, bar@mysql.com +11 -0
+    Adding test case
+    
+
+  mysql-test/r/lowercase_fs_off.result@1.0, 2006-05-04 11:55:03+05:00, bar@mysql.com +0 -0
+    BitKeeper file /usr/home/bar/mysql-4.1.b17647/mysql-test/r/lowercase_fs_off.result
+
+  mysql-test/t/lowercase_fs_off.test@1.1, 2006-05-04 11:55:04+05:00, bar@mysql.com +27 -0
+    Adding test case
+    
+
+  mysql-test/t/lowercase_fs_off.test@1.0, 2006-05-04 11:55:04+05:00, bar@mysql.com +0 -0
+    BitKeeper file /usr/home/bar/mysql-4.1.b17647/mysql-test/t/lowercase_fs_off.test
+
+  sql/sql_acl.cc@1.174.1.1, 2006-05-04 11:55:03+05:00, bar@mysql.com +3 -1
+    Initialize hash to use binary comparison with case sensitive FS.
+
+ChangeSet@1.2461.12.6, 2006-05-04 09:58:03+05:00, holyfoot@deer.(none) +1 -0
+  test result fixed
+
+  mysql-test/r/mysqltest.result@1.15, 2006-05-04 09:57:16+05:00, holyfoot@mysql.com +2 -2
+    result fixed
+
+ChangeSet@1.2461.16.2, 2006-05-04 03:12:51+02:00, tnurnberg@mysql.com +7 -0
+  Bug#19025 4.1 mysqldump doesn't correctly dump "auto_increment = [int]"
+  
+  mysqldump / SHOW CREATE TABLE will show the NEXT available value for
+  the PK, rather than the *first* one that was available (that named in
+  the original CREATE TABLE ... AUTO_INCREMENT = ... statement).
+  
+  This should produce correct and robust behaviour for the obvious use
+  cases -- when no data were inserted, then we'll produce a statement
+  featuring the same value the original CREATE TABLE had; if we dump
+  with values, INSERTing the values on the target machine should set the
+  correct next_ID anyway (and if not, we'll still have our AUTO_INCREMENT =
+  ... to do that). Lastly, just the CREATE statement (with no data) for
+  a table that saw inserts would still result in a table that new values
+  could safely be inserted to).
+  
+  There seems to be no robust way however to see whether the next_ID
+  field is > 1 because it was set to something else with CREATE TABLE
+  ... AUTO_INCREMENT = ..., or because there is an AUTO_INCREMENT column
+  in  the table (but no initial value was set with AUTO_INCREMENT = ...)
+  and then one or more rows were INSERTed, counting up next_ID. This
+  means that in both cases, we'll generate an AUTO_INCREMENT =
+  ... clause in SHOW CREATE TABLE / mysqldump.  As we also show info on,
+  say, charsets even if the user did not explicitly give that info in
+  their own CREATE TABLE, this shouldn't be an issue.
+  
+  As per above, the next_ID will be affected by any INSERTs that have
+  taken place, though.  This /should/ result in correct and robust
+  behaviour, but it may look non-intuitive to some users if they CREATE
+  TABLE ... AUTO_INCREMENT = 1000 and later (after some INSERTs) have
+  SHOW CREATE TABLE give them a different value (say, CREATE TABLE
+  ... AUTO_INCREMENT = 1006), so the docs should possibly feature a
+  caveat to that effect.
+  
+  It's not very intuitive the way it works now (with the fix), but it's
+  *correct*.  We're not storing the original value anyway, if we wanted
+  that, we'd have to change on-disk representation?
+  
+  If we do dump/load cycles with empty DBs, nothing will change.  This
+  changeset includes an additional test case that proves that tables
+  with rows will create the same next_ID for AUTO_INCREMENT = ... across
+  dump/restore cycles.
+  
+  Confirmed by support as likely solution for client's problem.
+
+  mysql-test/r/auto_increment.result@1.32, 2006-05-04 03:12:47+02:00, tnurnberg@mysql.com +24 -0
+    test for creation of AUTO_INCREMENT=... clause
+
+  mysql-test/r/gis-rtree.result@1.12, 2006-05-04 03:12:47+02:00, tnurnberg@mysql.com +1 -1
+    Add AUTO_INCREMENT=... clauses where appropriate
+
+  mysql-test/r/mysqldump.result@1.51, 2006-05-04 03:12:47+02:00, tnurnberg@mysql.com +38 -0
+    show that AUTO_INCREMENT=... will survive dump/restore cycles
+
+  mysql-test/r/symlink.result@1.20, 2006-05-04 03:12:47+02:00, tnurnberg@mysql.com +2 -2
+    Add AUTO_INCREMENT=... clauses where appropriate
+
+  mysql-test/t/auto_increment.test@1.24, 2006-05-04 03:12:47+02:00, tnurnberg@mysql.com +20 -1
+    test for creation of AUTO_INCREMENT=... clause
+
+  mysql-test/t/mysqldump.test@1.42, 2006-05-04 03:12:47+02:00, tnurnberg@mysql.com +31 -1
+    show that AUTO_INCREMENT=... will survive dump/restore cycles
+
+  sql/sql_show.cc@1.206.1.1, 2006-05-04 03:12:47+02:00, tnurnberg@mysql.com +18 -0
+    Add AUTO_INCREMENT=... to output of SHOW CREATE TABLE if there is an
+    AUTO_INCREMENT column, and NEXT_ID > 1 (the default).  We must not print
+    the clause for engines that do not support this as it would break the
+    import of dumps, but as of this writing, the test for whether
+    AUTO_INCREMENT columns are allowed and wether AUTO_INCREMENT=...
+    is supported is identical, !(file->table_flags() & HA_NO_AUTO_INCREMENT))
+    Because of that, we do not explicitly test for the feature,
+    but may extrapolate its existence from that of an AUTO_INCREMENT column.
+
+ChangeSet@1.2461.15.1, 2006-05-03 23:25:01+04:00, aivanov@mysql.com +1 -0
+  Applied innodb-4.1-ss26 snapshot.
+   Fixed BUG#19366: "consistent_snapshot.test fails".
+
+  innobase/include/dict0dict.ic@1.10, 2006-05-03 23:24:59+04:00, aivanov@mysql.com +0 -2
+    Applied innodb-4.1-ss26 snapshot.
+     Remove too strict assertions from some dict_table_t
+     accessor functions (Bug#19366).
+
+ChangeSet@1.2461.14.1, 2006-05-02 18:00:44+05:00, ramil@mysql.com +4 -0
+  Fix for bug #16546: DATETIME+0 not always coerced the same way
+
+  mysql-test/r/func_time.result@1.37.1.1, 2006-05-02 18:00:32+05:00, ramil@mysql.com +8 -4
+    Fix for bug #16546: DATETIME+0 not always coerced the same way
+      - test case
+
+  mysql-test/t/func_time.test@1.32.1.1, 2006-05-02 18:00:32+05:00, ramil@mysql.com +8 -0
+    Fix for bug #16546: DATETIME+0 not always coerced the same way
+      - test case
+
+  sql/item_timefunc.cc@1.98.1.1, 2006-05-02 18:00:32+05:00, ramil@mysql.com +3 -3
+    Fix for bug #16546: DATETIME+0 not always coerced the same way
+      - set decimals to DATETIME_DEC
+
+  sql/item_timefunc.h@1.57, 2006-05-02 18:00:32+05:00, ramil@mysql.com +1 -0
+    Fix for bug #16546: DATETIME+0 not always coerced the same way
+      - set decimals to DATETIME_DEC
+
+ChangeSet@1.2461.12.3, 2006-05-02 14:33:55+02:00, pekka@mysql.com +7 -0
+  ndb - bug#19201 (4.1), see comment in NdbBlob.cpp
+
+  mysql-test/r/ndb_blob.result@1.16, 2006-05-02 14:31:23+02:00, pekka@mysql.com +13 -5
+    bug#19201
+
+  mysql-test/t/ndb_blob.test@1.16, 2006-05-02 14:31:23+02:00, pekka@mysql.com +22 -3
+    bug#19201
+
+  ndb/include/kernel/signaldata/TcKeyReq.hpp@1.5, 2006-05-02 14:31:23+02:00, pekka@mysql.com +1 -0
+    bug#19201
+
+  ndb/include/ndbapi/NdbBlob.hpp@1.11, 2006-05-02 14:31:23+02:00, pekka@mysql.com +1 -0
+    bug#19201
+
+  ndb/src/ndbapi/NdbBlob.cpp@1.21, 2006-05-02 14:31:23+02:00, pekka@mysql.com +23 -1
+    bug#19201
+
+  ndb/test/ndbapi/testBlobs.cpp@1.25, 2006-05-02 14:28:32+02:00, pekka@mysql.com +9 -14
+    option -fac (fetch across commit)
+
+  ndb/tools/delete_all.cpp@1.13, 2006-05-02 14:29:24+02:00, pekka@mysql.com +14 -17
+    option --transactional (default remains truncate)
+
+ChangeSet@1.2461.11.2, 2006-05-01 21:30:09+03:00, jani@a193-229-222-105.elisa-laajakaista.fi +2 -0
+  Added tests for Bug#14515
+
+  mysql-test/r/ansi.result@1.6, 2006-05-01 21:30:05+03:00, jani@a193-229-222-105.elisa-laajakaista.fi +30 -1
+    Added tests for Bug#14515
+
+  mysql-test/t/ansi.test@1.9, 2006-05-01 21:30:05+03:00, jani@a193-229-222-105.elisa-laajakaista.fi +12 -0
+    Added tests for Bug#14515
+
+ChangeSet@1.2461.12.1, 2006-05-01 19:48:31+02:00, kent@mysql.com +1 -0
+  mysql.spec.sh:
+    Use "./libtool --mode=execute" to find real path to executables
+
+  support-files/mysql.spec.sh@1.114.1.2, 2006-05-01 19:46:52+02:00, kent@mysql.com +11 -15
+    Use "./libtool --mode=execute" to find real path to executables
+
+ChangeSet@1.2461.10.1, 2006-04-30 16:01:34+03:00, jani@a193-229-222-105.elisa-laajakaista.fi +2 -0
+  Fix for Bug#14515.
+
+  sql/set_var.cc@1.179.1.1, 2006-04-30 16:01:30+03:00, jani@a193-229-222-105.elisa-laajakaista.fi +0 -4
+    Fix for Bug#14515. These modes do not need restrictions, they're handled
+    separately in sql_show.cc
+
+  sql/sql_show.cc@1.207, 2006-04-30 16:01:30+03:00, jani@a193-229-222-105.elisa-laajakaista.fi +3 -4
+    Fix for Bug#14515.
+
+ChangeSet@1.2461.9.1, 2006-04-29 15:58:02+02:00, kent@mysql.com +1 -0
+  config-win.h:
+    Fix strange "double" define for popen.
+    Avoid warnings about sprintf() etc. being unsafe.
+    Corrected typo "#endfif"
+
+  include/config-win.h@1.58, 2006-04-29 15:55:53+02:00, kent@mysql.com +7 -2
+    Fix strange "double" define for popen.
+    Avoid warnings about sprintf() etc. being unsafe.
+    Corrected typo "#endfif"
+
+ChangeSet@1.2461.4.6, 2006-04-29 07:32:12+02:00, kent@mysql.com +1 -0
+  configure.in:
+    Changed version to 4.1.20
+
+  configure.in@1.407, 2006-04-29 07:31:32+02:00, kent@mysql.com +2 -2
+    Changed version to 4.1.20
+
+ChangeSet@1.2461.7.1, 2006-04-27 14:54:36+04:00, kroki@mysql.com +1 -0
+  Bug#16372: Server crashes when test 'conc_sys' is running
+  
+  Concurrent read and update of privilege structures (like simultaneous
+  run of SHOW GRANTS and ADD USER) could result in server crash.
+  
+  Ensure that proper locking of ACL structures is done.
+  
+  No test case is provided because this bug can't be reproduced
+  deterministically.
+
+  sql/sql_acl.cc@1.175, 2006-04-27 14:54:31+04:00, kroki@mysql.com +31 -6
+    Ensure that access to ACL data is protected by acl_cache->lock mutex.
+    Use system_charset_info for host names consistently.
+
+ChangeSet@1.2453.44.7, 2006-04-26 15:57:48+02:00, jonas@perch.ndb.mysql.com +3 -0
+  ndb -
+    Unleash backup to write more than 32k at a time
+    Using parameter BackupMaxWriteSize
+    (greatly affect LCP time in 5.1, set default value to 256k)
+
+  ndb/include/mgmapi/mgmapi_config_parameters.h@1.18, 2006-04-26 15:57:46+02:00, jonas@perch.ndb.mysql.com +1 -0
+    Add config fro max write size in backup
+
+  ndb/src/kernel/blocks/backup/BackupInit.cpp@1.13, 2006-04-26 15:57:46+02:00, jonas@perch.ndb.mysql.com +3 -2
+    Unleash backup to write more than 32k at a time
+
+  ndb/src/mgmsrv/ConfigInfo.cpp@1.62, 2006-04-26 15:57:46+02:00, jonas@perch.ndb.mysql.com +13 -1
+    Add config fro max write size in backup
+
+ChangeSet@1.2453.44.6, 2006-04-26 15:12:32+02:00, jonas@perch.ndb.mysql.com +2 -0
+  ndb - backport from 5.1
+    Fix alignment of sockaddr(_in)
+
+  ndb/src/common/transporter/Transporter.cpp@1.14, 2006-04-26 15:12:30+02:00, jonas@perch.ndb.mysql.com +6 -6
+    Fix alignment of sockaddr(_in)
+
+  ndb/src/mgmsrv/Services.cpp@1.40, 2006-04-26 15:12:30+02:00, jonas@perch.ndb.mysql.com +3 -3
+    Fix alignment of sockaddr(_in)
+
+ChangeSet@1.2453.44.5, 2006-04-26 14:54:20+02:00, jonas@perch.ndb.mysql.com +1 -0
+  Add ndb_config to rpm spec
+
+  support-files/mysql.spec.sh@1.115, 2006-04-26 14:54:18+02:00, jonas@perch.ndb.mysql.com +1 -0
+    Add ndb_config to rpm spec
+
+ChangeSet@1.2453.44.4, 2006-04-26 14:53:43+02:00, jonas@perch.ndb.mysql.com +2 -0
+  ndb - bug#17150
+    ndb_mgmd limited no of api nodes, by restricting no of mgmsessions
+    (these are used for dynamic port allocation)
+
+  ndb/include/util/SocketServer.hpp@1.7, 2006-04-26 14:53:41+02:00, jonas@perch.ndb.mysql.com +1 -1
+    Increase default max session to ~0
+
+  ndb/src/common/util/SocketServer.cpp@1.13, 2006-04-26 14:53:42+02:00, jonas@perch.ndb.mysql.com +2 -2
+    Increase default max session to ~0
+
+ChangeSet@1.2453.49.1, 2006-04-25 15:27:28+05:00, ramil@mysql.com +1 -0
+  Fix for bug #7643: ALTER TABLE fails for CSV, EXAMPLE, ARCHIVE engines
+  
+
+  sql/sql_table.cc@1.304.3.1, 2006-04-25 15:27:24+05:00, ramil@mysql.com +3 -1
+    Fix for bug #7643: ALTER TABLE fails for CSV, EXAMPLE, ARCHIVE engines
+      - issue an ER_NOT_SUPPORTED_YET if an engine doesn't support ALTER TABLE.
+
+ChangeSet@1.2458.13.1, 2006-04-25 14:34:19+05:00, ramil@mysql.com +3 -0
+  Fix for bug #18501: Server crashes with monthname().
+
+  mysql-test/r/func_time.result@1.38, 2006-04-25 14:34:13+05:00, ramil@mysql.com +4 -0
+    Fix for bug #18501: Server crashes with monthname().
+      - test case
+
+  mysql-test/t/func_time.test@1.33, 2006-04-25 14:34:13+05:00, ramil@mysql.com +7 -0
+    Fix for bug #18501: Server crashes with monthname().
+      - test case
+
+  sql/item_timefunc.cc@1.99, 2006-04-25 14:34:14+05:00, ramil@mysql.com +2 -2
+    Fix for bug #18501: Server crashes with monthname().
+      - check null_value as well.
+
+ChangeSet@1.2460.1.1, 2006-04-24 18:06:43+04:00, kroki@mysql.com +3 -0
+  Bug#16501: IS_USED_LOCK does not appear to work
+  
+  Update User_level_lock::thread_id on acquiring an existing lock,
+  and reset it on lock release.
+
+  mysql-test/r/func_misc.result@1.18, 2006-04-24 18:06:38+04:00, kroki@mysql.com +36 -0
+    Add result for bug#16501.
+
+  mysql-test/t/func_misc.test@1.14, 2006-04-24 18:06:39+04:00, kroki@mysql.com +38 -0
+    Add test case for bug#16501.
+
+  sql/item_func.cc@1.260, 2006-04-24 18:06:39+04:00, kroki@mysql.com +2 -0
+    Update User_level_lock::thread_id on acquiring an existing lock,
+    and reset it on lock release (for safety).
+
+ChangeSet@1.2458.12.1, 2006-04-24 13:07:53+05:00, holyfoot@vva.(none) +1 -0
+  bug #16892 (mysql_client_test fails in embedded server)
+
+  mysql-test/t/mysql_client_test.test@1.15, 2006-04-24 13:07:14+05:00, holyfoot@mysql.com +3 -0
+    test disabled in embedded server
+
+ChangeSet@1.2453.45.1, 2006-04-11 15:01:21+05:00, holyfoot@deer.(none) +3 -0
+  bug #15442 (mysqltest.test doesn't work with the embedded server)
+
+  mysql-test/mysql-test-run.pl@1.63, 2006-04-11 15:00:37+05:00, holyfoot@mysql.com +1 -0
+    no ndbcluster needed here
+
+  mysql-test/mysql-test-run.sh@1.265, 2006-04-11 15:00:37+05:00, holyfoot@mysql.com +1 -0
+    no ndbcluster needed here
+
+  mysql-test/t/mysqltest.test@1.19, 2006-04-11 15:00:37+05:00, holyfoot@mysql.com +1 -0
+    this test shouldn't work with the embedded server
+
+ChangeSet@1.1346.872.1, 2006-04-10 13:38:56+02:00, ingo@mysql.com +1 -0
+  Bug#10405 - myisamchk damages auto_increment columns when changing character set
+  
+  Whenever 'myisamchk' needed to recreate a table,
+  the auto increment information was lost.
+  
+  Now the forgotten element of the table creation
+  information is set correctly.
+
+  myisam/mi_check.c@1.86.1.50, 2006-04-10 13:38:54+02:00, ingo@mysql.com +17 -9
+    Bug#10405 - myisamchk damages auto_increment columns when changing character set
+    Added some DBUG statements.
+    Enabled 'with_auto_increment' in 'create_info'
+    when recreating a table.
+
+ChangeSet@1.2453.11.1, 2006-02-02 10:27:48+04:00, ramil@mysql.com +1 -0
+  Fix for bug #16900: Crash during query "reap" on OS X.
+
+  sql/sql_class.cc@1.205, 2006-02-02 10:27:34+04:00, ramil@mysql.com +3 -2
+    Fix for bug #16900: Crash during query "reap" on OS X.
+    -  call close_active_vio() only if we don't kill the thread.
+
+ChangeSet@1.2453.7.1, 2006-01-27 13:38:15+01:00, kent@mysql.com +1 -0
+  disabled.def:
+    Enabled rpl_* tests now when bug fixed
+  TAG: mysql-4.1.18
+
+  mysql-test/t/disabled.def@1.1.1.1, 2006-01-27 13:37:51+01:00, kent@mysql.com +0 -3
+    Enabled rpl_* tests now when bug fixed
+
+ChangeSet@1.2447.63.1, 2005-12-10 18:02:36+04:00, holyfoot@deer.(none) +3 -0
+  Fix for bug #15225 (ANALYZE temporary has no effect)
+
+  mysql-test/r/analyze.result@1.4, 2005-12-10 18:01:53+04:00, holyfoot@mysql.com +9 -0
+    test result fixed
+
+  mysql-test/t/analyze.test@1.7, 2005-12-10 18:01:53+04:00, holyfoot@mysql.com +9 -0
+    test case added
+
+  sql/sql_table.cc@1.301.1.7, 2005-12-10 18:01:53+04:00, holyfoot@mysql.com +9 -4
+    we don't need to remove temporary table from the cache,
+    but we need to reload it's info
+
